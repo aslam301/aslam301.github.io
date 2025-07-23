@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mohammed Aslam K U - Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0f172a;
+            color: #94a3b8;
+        }
+        .nav-indicator {
+            transition: all 0.2s ease-in-out;
+        }
+        .group:hover .nav-indicator, .group.active .nav-indicator {
+            width: 4rem;
+            background-color: #e2e8f0;
+        }
+        .group:hover .nav-text, .group.active .nav-text {
+            color: #e2e8f0;
+        }
+        .group\/link:hover .text-slate-200 {
+            color: #5eead4;
+        }
+        
+        /* Chatbot Styles */
+        #chat-widget {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+        #chat-button {
+            background-color: #14b8a6; /* teal-500 */
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: transform 0.2s ease-in-out;
+        }
+        #chat-button:hover {
+            transform: scale(1.1);
+        }
+        #chat-window {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            width: 350px;
+            max-width: 90vw;
+            height: 500px;
+            max-height: 70vh;
+            background-color: #1e293b; /* slate-800 */
+            border-radius: 15px;
+            box-shadow: 0 10px 15px rgba(0,0,0,0.2);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transform: translateY(20px) scale(0.95);
+            opacity: 0;
+            transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+            pointer-events: none;
+        }
+        #chat-window.open {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+            pointer-events: auto;
+        }
+        #chat-header {
+            background-color: #334155; /* slate-700 */
+            padding: 1rem;
+            color: #e2e8f0; /* slate-200 */
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        #chat-messages {
+            flex-grow: 1;
+            padding: 1rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        .chat-message {
+            padding: 0.75rem 1rem;
+            border-radius: 10px;
+            max-width: 80%;
+            line-height: 1.5;
+        }
+        .user-message {
+            background-color: #14b8a6; /* teal-500 */
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 0;
+        }
+        .model-message {
+            background-color: #334155; /* slate-700 */
+            color: #cbd5e1; /* slate-300 */
+            align-self: flex-start;
+            border-bottom-left-radius: 0;
+        }
+        #chat-form {
+            display: flex;
+            padding: 1rem;
+            border-top: 1px solid #334155; /* slate-700 */
+        }
+        #chat-input {
+            flex-grow: 1;
+            background-color: #0f172a; /* slate-900 */
+            border: 1px solid #334155; /* slate-700 */
+            border-radius: 20px;
+            padding: 0.5rem 1rem;
+            color: #e2e8f0; /* slate-200 */
+        }
+        #chat-input:focus {
+            outline: none;
+            border-color: #14b8a6; /* teal-500 */
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-teal-300 selection:text-teal-900">
+    <div class="mx-auto min-h-screen max-w-screen-xl px-6 py-12 md:px-12 md:py-20 lg:px-24 lg:py-0">
+        <div class="lg:flex lg:justify-between lg:gap-4">
+            <header class="lg:sticky lg:top-0 lg:flex lg:max-h-screen lg:w-1/2 lg:flex-col lg:justify-between lg:py-24">
+                <div>
+                    <h1 class="text-4xl font-bold tracking-tight text-slate-200 sm:text-5xl">Mohammed Aslam K U</h1>
+                    <h2 class="mt-3 text-lg font-medium tracking-tight text-slate-200 sm:text-xl">Technical Project Manager | Scrum Master</h2>
+                    <p class="mt-4 max-w-xs leading-normal">I build and manage scalable software solutions that drive business growth.</p>
+                    <nav class="nav hidden lg:block" aria-label="In-page jump links">
+                        <ul class="mt-16 w-max">
+                            <li><a class="group flex items-center py-3 active" href="#about"><span class="nav-indicator mr-4 h-px w-8 bg-slate-600"></span><span class="nav-text text-xs font-bold uppercase tracking-widest text-slate-500">About</span></a></li>
+                            <li><a class="group flex items-center py-3" href="#experience"><span class="nav-indicator mr-4 h-px w-8 bg-slate-600"></span><span class="nav-text text-xs font-bold uppercase tracking-widest text-slate-500">Experience</span></a></li>
+                            <li><a class="group flex items-center py-3" href="#projects"><span class="nav-indicator mr-4 h-px w-8 bg-slate-600"></span><span class="nav-text text-xs font-bold uppercase tracking-widest text-slate-500">Projects</span></a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <ul class="ml-1 mt-8 flex items-center" aria-label="Social media">
+                    <li class="mr-5 shrink-0 text-xs"><a class="block hover:text-slate-200" href="https://github.com/aslam301" target="_blank" rel="noreferrer noopener" aria-label="GitHub (opens in a new tab)" title="GitHub"><span class="sr-only">GitHub</span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="h-6 w-6" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg></a></li>
+                    <li class="mr-5 shrink-0 text-xs"><a class="block hover:text-slate-200" href="https://linkedin.com/in/aslam301" target="_blank" rel="noreferrer noopener" aria-label="LinkedIn (opens in a new tab)" title="LinkedIn"><span class="sr-only">LinkedIn</span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-6 w-6" aria-hidden="true"><path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"></path></svg></a></li>
+                </ul>
+            </header>
+            <main id="content" class="pt-24 lg:w-1/2 lg:py-24">
+                <section id="about" class="mb-16 scroll-mt-16 md:mb-24 lg:mb-36 lg:scroll-mt-24" aria-label="About me">
+                    <div class="sticky top-0 z-20 -mx-6 mb-4 w-screen bg-slate-900/75 px-6 py-5 backdrop-blur md:-mx-12 md:px-12 lg:sr-only lg:relative lg:top-auto lg:mx-auto lg:w-full lg:px-0 lg:py-0 lg:opacity-0">
+                        <h2 class="text-sm font-bold uppercase tracking-widest text-slate-200 lg:sr-only">About</h2>
+                    </div>
+                    <div>
+                        <p class="mb-4">As a Technical Project Manager with over 7 years in software development and 5 years leading cross-functional projects, I have a proven track record of delivering results. Most recently, I spearheaded a 40-member team at Price.com, managing over 400 million product data points and achieving a 40% reduction in server load and operational costs.</p>
+                        <p class="mb-4">I am known for my Agile leadership, product scalability, and ability to align technical solutions with business goals. I am passionate about optimizing development lifecycles and mentoring teams, and I am actively working toward a future CTO role.</p>
+                    </div>
+                </section>
+                <section id="experience" class="mb-16 scroll-mt-16 md:mb-24 lg:mb-36 lg:scroll-mt-24" aria-label="Work experience">
+                    <div class="sticky top-0 z-20 -mx-6 mb-4 w-screen bg-slate-900/75 px-6 py-5 backdrop-blur md:-mx-12 md:px-12 lg:sr-only lg:relative lg:top-auto lg:mx-auto lg:w-full lg:px-0 lg:py-0 lg:opacity-0">
+                        <h2 class="text-sm font-bold uppercase tracking-widest text-slate-200 lg:sr-only">Experience</h2>
+                    </div>
+                    <div>
+                        <ol class="group/list">
+                            <li class="mb-12">
+                                <div class="group relative grid pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50">
+                                    <div class="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-slate-800/50 lg:group-hover:shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] lg:group-hover:drop-shadow-lg"></div>
+                                    <header class="z-10 mb-2 mt-1 text-xs font-semibold uppercase tracking-wide text-slate-500 sm:col-span-2" aria-label="2023 to 2025">Nov 2023 — June 2025</header>
+                                    <div class="z-10 sm:col-span-6">
+                                        <h3 class="font-medium leading-snug text-slate-200">
+                                            <div><a class="inline-flex items-baseline font-medium leading-tight text-slate-200 hover:text-teal-300 focus-visible:text-teal-300 group/link text-base" href="https://price.com/" target="_blank" rel="noreferrer noopener" aria-label="Price.com (opens in a new tab)"><span>Technical Project Manager | Scrum Master · <span class="inline-block">Price.com</span></span></a></div>
+                                        </h3>
+                                        <p class="mt-2 text-sm leading-normal">Led cross-continental Agile teams to manage 400M+ data points. Drove AI integration and performance scaling across the product ecosystem. Conducted scrum calls, stand-up meetings, presentations, and sprint retrospectives. Regularly presented product updates to stakeholders and C-suite.</p>
+                                        <ul class="mt-2 flex flex-wrap" aria-label="Technologies used">
+                                            <li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-teal-400/10 px-3 py-1 text-xs font-medium leading-5 text-teal-300">Agile</div></li>
+                                            <li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-teal-400/10 px-3 py-1 text-xs font-medium leading-5 text-teal-300">Scrum</div></li>
+                                            <li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-teal-400/10 px-3 py-1 text-xs font-medium leading-5 text-teal-300">JIRA</div></li>
+                                            <li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-teal-400/10 px-3 py-1 text-xs font-medium leading-5 text-teal-300">AI</div></li>
+                                            <li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-teal-400/10 px-3 py-1 text-xs font-medium leading-5 text-teal-300">AWS</div></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="mb-12">
+                                <div class="group relative grid pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50">
+                                    <div class="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-slate-800/50 lg:group-hover:shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] lg:group-hover:drop-shadow-lg"></div>
+                                    <header class="z-10 mb-2 mt-1 text-xs font-semibold uppercase tracking-wide text-slate-500 sm:col-span-2" aria-label="2022 to 2023">May 2022 — Nov 2023</header>
+                                    <div class="z-10 sm:col-span-6">
+                                        <h3 class="font-medium leading-snug text-slate-200">
+                                            <div><a class="inline-flex items-baseline font-medium leading-tight text-slate-200 hover:text-teal-300 focus-visible:text-teal-300 group/link text-base" href="#" aria-label="UFO Games Pvt Ltd"><span>Technical Project Manager | Scrum Master · <span class="inline-block">UFO Games Pvt Ltd</span></span></a></div>
+                                        </h3>
+                                        <p class="mt-2 text-sm leading-normal">Managed the complete rebuild and release of a real-money mobile gaming app. Oversaw compliance, game logic balancing, and growth optimization. Supported funding campaigns and investor interactions. Managed internal (SharePoint) & external company (WordPress) website.</p>
+                                        <ul class="mt-2 flex flex-wrap" aria-label="Technologies used">
+                                            <li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-teal-400/10 px-3 py-1 text-xs font-medium leading-5 text-teal-300">Unity3D</div></li>
+                                            <li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-teal-400/10 px-3 py-1 text-xs font-medium leading-5 text-teal-300">Photon Engine</div></li>
+                                            <li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-teal-400/10 px-3 py-1 text-xs font-medium leading-5 text-teal-300">SharePoint</div></li>
+                                            <li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-teal-400/10 px-3 py-1 text-xs font-medium leading-5 text-teal-300">WordPress</div></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li>
+                             <li class="mb-12">
+                                <div class="group relative grid pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50">
+                                    <div class="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-slate-800/50 lg:group-hover:shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] lg:group-hover:drop-shadow-lg"></div>
+                                    <header class="z-10 mb-2 mt-1 text-xs font-semibold uppercase tracking-wide text-slate-500 sm:col-span-2" aria-label="2018 to 2022">Mar 2018 — May 2022</header>
+                                    <div class="z-10 sm:col-span-6">
+                                        <h3 class="font-medium leading-snug text-slate-200">
+                                            <div><a class="inline-flex items-baseline font-medium leading-tight text-slate-200 hover:text-teal-300 focus-visible:text-teal-300 group/link text-base" href="#" aria-label="NGN TECH"><span>Project Manager / PHP Developer · <span class="inline-block">NGN TECH</span></span></a></div>
+                                        </h3>
+                                        <p class="mt-2 text-sm leading-normal">Managed full-cycle development for business platforms in diverse verticals. Coordinated UI/UX, backend, and deployment across web and mobile. Acted as client liaison, translating business needs into technical specs.</p>
+                                        <ul class="mt-2 flex flex-wrap" aria-label="Technologies used">
+                                            <li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-teal-400/10 px-3 py-1 text-xs font-medium leading-5 text-teal-300">PHP Laravel</div></li>
+                                            <li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-teal-400/10 px-3 py-1 text-xs font-medium leading-5 text-teal-300">ReactJS</div></li>
+                                            <li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-teal-400/10 px-3 py-1 text-xs font-medium leading-5 text-teal-300">Flutter</div></li>
+                                            <li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-teal-400/10 px-3 py-1 text-xs font-medium leading-5 text-teal-300">NodeJS</div></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li>
+                        </ol>
+                        <div class="mt-12">
+                            <a class="inline-flex items-baseline font-medium leading-tight text-slate-200 hover:text-teal-300 focus-visible:text-teal-300 font-semibold text-slate-200 group/link text-base" href="Resume_latest.pdf" target="_blank" rel="noreferrer noopener" aria-label="View Full Résumé (opens in a new tab)">
+                                <span>View Full 
+                                    <span class="inline-block">Résumé
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="inline-block h-4 w-4 shrink-0 transition-transform group-hover/link:-translate-y-1 group-hover/link:translate-x-1 group-focus-visible/link:-translate-y-1 group-focus-visible/link:translate-x-1 motion-reduce:transition-none ml-1 translate-y-px" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 14.78a.75.75 0 001.06 0l7.22-7.22v5.69a.75.75 0 001.5 0v-7.5a.75.75 0 00-.75-.75h-7.5a.75.75 0 000 1.5h5.69l-7.22 7.22a.75.75 0 000 1.06z" clip-rule="evenodd"></path></svg>
+                                    </span>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="projects" class="mb-16 scroll-mt-16 md:mb-24 lg:mb-36 lg:scroll-mt-24" aria-label="Selected projects">
+                    <div class="sticky top-0 z-20 -mx-6 mb-4 w-screen bg-slate-900/75 px-6 py-5 backdrop-blur md:-mx-12 md:px-12 lg:sr-only lg:relative lg:top-auto lg:mx-auto lg:w-full lg:px-0 lg:py-0 lg:opacity-0">
+                        <h2 class="text-sm font-bold uppercase tracking-widest text-slate-200 lg:sr-only">Projects</h2>
+                    </div>
+                    <div>
+                        <ul class="group/list">
+                            <li class="mb-12">
+                                <div class="group relative grid gap-4 pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50">
+                                    <div class="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-slate-800/50 lg:group-hover:shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] lg:group-hover:drop-shadow-lg"></div>
+                                    <div class="z-10 sm:order-2 sm:col-span-6">
+                                        <h3><a class="inline-flex items-baseline font-medium leading-tight text-slate-200 hover:text-teal-300 focus-visible:text-teal-300 group/link text-base" href="#" aria-label="Real-Money Gaming Platform"><span>Real-Money Gaming Platform</span></a></h3>
+                                        <p class="mt-2 text-sm leading-normal">Led a cross-functional team of 30+ to redesign and relaunch an RMG platform 30% ahead of schedule. Scaled platform to support 500K+ users with 200+ concurrent gamers, maintaining regulatory compliance. Drove fundraising efforts that led to the successful acquisition of the app by a Singapore-based company.</p>
+                                    </div>
+                                    <img alt="Real-Money Gaming Platform" loading="lazy" width="200" height="48" decoding="async" data-nimg="1" class="aspect-video object-cover rounded border-2 border-slate-200/10 transition group-hover:border-slate-200/30 sm:order-1 sm:col-span-2 sm:translate-y-1" style="color:transparent" src="https://placehold.co/200x112/0f172a/94a3b8?text=RMG+Platform">
+                                </div>
+                            </li>
+                            <li class="mb-12">
+                                <div class="group relative grid gap-4 pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50">
+                                    <div class="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-slate-800/50 lg:group-hover:shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] lg:group-hover:drop-shadow-lg"></div>
+                                    <div class="z-10 sm:order-2 sm:col-span-6">
+                                        <h3><a class="inline-flex items-baseline font-medium leading-tight text-slate-200 hover:text-teal-300 focus-visible:text-teal-300 group/link text-base" href="#" aria-label="Price.com - E-commerce Savings Platform"><span>Price.com - E-commerce Savings Platform</span></a></h3>
+                                        <p class="mt-2 text-sm leading-normal">Managed a global team of 40+ engineers and analysts, overseeing a product catalog of 400M+ e-commerce SKUs. Designed and deployed DAG-based data pipelines that reduced server costs and load by 40%. Introduced AI-powered features enhancing search and personalization, boosting engagement and user satisfaction.</p>
+                                    </div>
+                                     <img alt="Price.com" loading="lazy" width="200" height="48" decoding="async" data-nimg="1" class="aspect-video object-cover rounded border-2 border-slate-200/10 transition group-hover:border-slate-200/30 sm:order-1 sm:col-span-2 sm:translate-y-1" style="color:transparent" src="https://placehold.co/200x112/0f172a/94a3b8?text=Price.com">
+                                </div>
+                            </li>
+                            <li class="mb-12">
+                                <div class="group relative grid gap-4 pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50">
+                                    <div class="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-slate-800/50 lg:group-hover:shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] lg:group-hover:drop-shadow-lg"></div>
+                                    <div class="z-10 sm:order-2 sm:col-span-6">
+                                        <h3><a class="inline-flex items-baseline font-medium leading-tight text-slate-200 hover:text-teal-300 focus-visible:text-teal-300 group/link text-base" href="#" aria-label="AI-Powered Accounting Software"><span>AI-Powered Accounting Software</span></a></h3>
+                                        <p class="mt-2 text-sm leading-normal">Directed a 6-member dev team to build a Tally/Zoho Books alternative featuring automated invoice parsing and ledger generation. Reduced client accounting time by up to 70%, streamlining compliance and recordkeeping. Immersed in accounting workflows to ensure business-technical alignment, reducing dev cycles by 25%.</p>
+                                    </div>
+                                     <img alt="AI Accounting" loading="lazy" width="200" height="48" decoding="async" data-nimg="1" class="aspect-video object-cover rounded border-2 border-slate-200/10 transition group-hover:border-slate-200/30 sm:order-1 sm:col-span-2 sm:translate-y-1" style="color:transparent" src="https://placehold.co/200x112/0f172a/94a3b8?text=AI+Accounting">
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+                <footer class="max-w-md pb-16 text-sm text-slate-500 sm:pb-0">
+                    <p>Loosely designed in <a href="https://www.figma.com/" class="font-medium text-slate-400 hover:text-teal-300 focus-visible:text-teal-300" target="_blank" rel="noreferrer noopener">Figma</a> and coded in <a href="https://code.visualstudio.com/" class="font-medium text-slate-400 hover:text-teal-300 focus-visible:text-teal-300" target="_blank" rel="noreferrer noopener">Visual Studio Code</a> by yours truly. Built with <a href="https://tailwindcss.com/" class="font-medium text-slate-400 hover:text-teal-300 focus-visible:text-teal-300" target="_blank" rel="noreferrer noopener">Tailwind CSS</a>. All text is set in the <a href="https://rsms.me/inter/" class="font-medium text-slate-400 hover:text-teal-300 focus-visible:text-teal-300" target="_blank" rel="noreferrer noopener">Inter</a> typeface.</p>
+                </footer>
+            </main>
+        </div>
+    </div>
+
+    <!-- Chatbot Widget -->
+    <div id="chat-widget">
+        <div id="chat-window">
+            <div id="chat-header">
+                <span>Chat with my Resume AI</span>
+                <button id="close-chat" class="text-xl">&times;</button>
+            </div>
+            <div id="chat-messages">
+                <!-- Messages will be appended here -->
+            </div>
+            <form id="chat-form">
+                <input type="text" id="chat-input" placeholder="Ask about my experience..." autocomplete="off">
+            </form>
+        </div>
+        <button id="chat-button">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.839 8.839 0 01-4.082-.978L2 17.632V13.5A7.962 7.962 0 012 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM4.832 14.326l.886.443A6.838 6.838 0 0010 15c3.313 0 6-2.686 6-6s-2.687-6-6-6-6 2.686-6 6c0 1.47.527 2.822 1.423 3.896l.443.543-.28.842-1.42 4.258 3.235-1.617z" clip-rule="evenodd" />
+            </svg>
+        </button>
+    </div>
+
+    <script>
+        // --- Resume Data for Chatbot ---
+        const resumeText = `
+            Mohammed Aslam K U
+            Technical Project Manager | Scrum Master
+            Completed Notice Period
+            Kochi, Kerala, India (Open to relocation worldwide)
+
+            Profile Summary:
+            Technical Project Manager with 7+ years in software development and 5+ years leading cross-functional projects. Completed my notice period on June 30th, Previously spearheading a 40-member team at Price.com across India and the US to manage over 400 million product data points, driving a 40% reduction in server load and operational costs. Known for Agile leadership, product scalability, and aligning technical solutions with business goals. Passionate about optimizing development lifecycles and mentoring teams - actively working toward a future CTO role.
+
+            Contact:
+            Email: aslam301mohammed@gmail.com
+            Phone: +91 807 811 3484
+            LinkedIn: linkedin.com/in/aslam301
+            GitHub: github.com/aslam301
+
+            Core Competencies / Skills:
+            Project Management: Agile/Scrum, Sprint Planning, Roadmapping, Backlog Prioritization, Risk Management, Cost Optimization, Scrum Calls.
+            Product & Technical Leadership: Product Roadmap, Feature Definition, Stakeholder Collaboration, Full Stack Strategy, Architecture Planning, Client handling.
+            Tech Stack: PHP Laravel, Python Django, NodeJS, ReactJS, Unity3D, Flutter, ExpressJS, WordPress.
+            Tools & Platforms: JIRA, Figma, SharePoint, Git, Photon Engine, AWS, Google Development console, Google Ads Manager, Facebook Ads Manager.
+            Business Impact: Investor Relations, Fundraising Support, Process Automation, Product-Market Fit Strategy.
+            AI Proficiency: OpenAI, AWS Textract, Python-based AI frameworks, AI scraping, invoice automation, recommendation systems.
+
+            Work Experience:
+            1. Technical Project Manager | Scrum Master at Price.com (Nov 2023 - June 2025)
+               - Led cross-continental Agile teams to manage 400M+ data points.
+               - Drove AI integration and performance scaling across the product ecosystem.
+               - Conducted scrum calls, stand-up meetings, presentations and sprint retrospectives.
+               - Regularly presented product updates to stakeholders and C-suite.
+
+            2. Technical Project Manager | Scrum Master at UFO Games Pvt Ltd (May 2022 - Nov 2023)
+               - Managed the complete rebuild and release of a real-money mobile gaming app.
+               - Oversaw compliance, game logic balancing, and growth optimization.
+               - Supported funding campaigns and investor interactions.
+               - Managed internal (SharePoint) & external company (wordpress) website.
+
+            3. Project Manager / PHP Developer at NGN TECH (Mar 2018 - May 2022)
+               - Managed full-cycle development for business platforms in diverse verticals.
+               - Coordinated UI/UX, backend, and deployment across web and mobile.
+               - Acted as client liaison, translating business needs into technical specs.
+
+            Key Projects:
+            - Real-Money Gaming Platform: Led a team of 30+ to relaunch an RMG platform 30% ahead of schedule, scaling it to support 500K+ users.
+            - Price.com - E-commerce Savings Platform: Managed a global team of 40+, overseeing a 400M+ SKU product catalog and reducing server costs by 40% with DAG-based data pipelines.
+            - AI-Powered Accounting Software: Directed a 6-member team to build a Zoho Books alternative, reducing client accounting time by 70%.
+            - AI Project Management Assistant (Personal Project): Built a self-hosted PM tool using PHP and OpenAI to automate project reports.
+            - Real Estate Platform - Canadian Market: Managed a 20+ member team for one of Canada's leading real estate listing apps.
+
+            Education:
+            - Bachelor of Computer Applications (BCA), Mahatma Gandhi University, Kottayam (2015-2018)
+            - Professional Diploma in IT Infrastructure, Keltron REC, Kalamassery (2018)
+
+            Certifications:
+            - Project Management - Coursera, 2020
+            - Digital Marketing - NGN TECH, 2019
+        `;
+
+        // --- Chatbot UI Interaction ---
+        const chatButton = document.getElementById('chat-button');
+        const chatWindow = document.getElementById('chat-window');
+        const closeChatBtn = document.getElementById('close-chat');
+        const chatForm = document.getElementById('chat-form');
+        const chatInput = document.getElementById('chat-input');
+        const chatMessages = document.getElementById('chat-messages');
+
+        chatButton.addEventListener('click', () => chatWindow.classList.toggle('open'));
+        closeChatBtn.addEventListener('click', () => chatWindow.classList.remove('open'));
+
+        // --- Chatbot Logic ---
+        let chatHistory = [];
+        const systemPrompt = `You are a friendly and professional recruitment assistant for Mohammed Aslam K U. Your sole purpose is to answer questions based on his resume, which is provided below. Be helpful and conversational. If a question is asked that cannot be answered from the resume, politely state that you can only provide information found in the document. Do not invent any information. Here is the resume:\n\n---\n\n${resumeText}`;
+
+        async function handleUserMessage(e) {
+            e.preventDefault();
+            const userInput = chatInput.value.trim();
+            if (!userInput) return;
+
+            addMessage(userInput, 'user');
+            chatInput.value = '';
+            
+            // Add a temporary loader message
+            const loader = addMessage('...', 'model', true);
+
+            try {
+                const modelResponse = await callGeminiForChat(userInput);
+                // Remove loader and add the actual response
+                loader.remove();
+                addMessage(modelResponse, 'model');
+            } catch (error) {
+                loader.remove();
+                addMessage("Sorry, I'm having trouble connecting right now. Please try again later.", 'model');
+            }
+        }
+
+        chatForm.addEventListener('submit', handleUserMessage);
+
+        function addMessage(text, sender, isLoading = false) {
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('chat-message', `${sender}-message`);
+            
+            if (isLoading) {
+                 messageElement.innerHTML = '<div class="flex items-center justify-center gap-1"><span class="h-2 w-2 bg-slate-400 rounded-full animate-bounce [animation-delay:-0.3s]"></span><span class="h-2 w-2 bg-slate-400 rounded-full animate-bounce [animation-delay:-0.15s]"></span><span class="h-2 w-2 bg-slate-400 rounded-full animate-bounce"></span></div>';
+            } else {
+                messageElement.textContent = text;
+            }
+
+            chatMessages.appendChild(messageElement);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+            return messageElement;
+        }
+        
+        // --- Gemini API Call ---
+        async function callGeminiForChat(userInput) {
+            // Add user message to history
+            chatHistory.push({ role: "user", parts: [{ text: userInput }] });
+
+            const apiKey = ""; // Leave empty, handled by environment
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+            
+            // The payload includes the system instruction and the ongoing chat history
+            const payload = {
+                contents: [
+                    { role: "user", parts: [{ text: systemPrompt }] },
+                    { role: "model", parts: [{ text: "Hello! How can I help you learn more about Mohammed Aslam's experience today?" }] },
+                    ...chatHistory
+                ]
+            };
+
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) {
+                    throw new Error(`API call failed with status: ${response.status}`);
+                }
+
+                const result = await response.json();
+                
+                if (result.candidates && result.candidates.length > 0) {
+                    const modelResponseText = result.candidates[0].content.parts[0].text;
+                    // Add model response to history
+                    chatHistory.push({ role: "model", parts: [{ text: modelResponseText }] });
+                    return modelResponseText;
+                } else {
+                    throw new Error("No content received from API.");
+                }
+
+            } catch (error) {
+                console.error("Gemini API call error:", error);
+                // Remove the last user message from history on failure to allow retry
+                chatHistory.pop();
+                throw error; // Re-throw to be caught by the caller
+            }
+        }
+
+        // Initial greeting
+        addMessage("Hi there! I'm Aslam's AI assistant. Feel free to ask me anything about his resume.", 'model');
+
+
+        // --- Nav scroll ---
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('nav a');
+
+        window.addEventListener('scroll', () => {
+            let current = 'about'; // Default to about
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 60) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
