@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,22 +15,26 @@
             background-color: #0f172a;
             color: #94a3b8;
         }
+
         .nav-indicator {
             transition: all 0.2s ease-in-out;
         }
+
         .group.active .nav-indicator,
         .group:hover .nav-indicator {
             width: 4rem;
             background-color: #e2e8f0;
         }
+
         .group.active .nav-text,
         .group:hover .nav-text {
             color: #e2e8f0;
         }
+
         .group\/link:hover .text-slate-200 {
             color: #5eead4;
         }
-        
+
         /* Chatbot Styles */
         #chat-widget {
             position: fixed;
@@ -37,8 +42,10 @@
             right: 20px;
             z-index: 1000;
         }
+
         #chat-button {
-            background-color: #14b8a6; /* teal-500 */
+            background-color: #14b8a6;
+            /* teal-500 */
             color: white;
             width: 60px;
             height: 60px;
@@ -46,13 +53,15 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             cursor: pointer;
             transition: transform 0.2s ease-in-out;
         }
+
         #chat-button:hover {
             transform: scale(1.1);
         }
+
         #chat-window {
             position: fixed;
             bottom: 90px;
@@ -61,9 +70,10 @@
             max-width: 90vw;
             height: 500px;
             max-height: 70vh;
-            background-color: #1e293b; /* slate-800 */
+            background-color: #1e293b;
+            /* slate-800 */
             border-radius: 15px;
-            box-shadow: 0 10px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
             display: flex;
             flex-direction: column;
             overflow: hidden;
@@ -72,20 +82,25 @@
             transition: transform 0.3s ease-out, opacity 0.3s ease-out;
             pointer-events: none;
         }
+
         #chat-window.open {
             transform: translateY(0) scale(1);
             opacity: 1;
             pointer-events: auto;
         }
+
         #chat-header {
-            background-color: #334155; /* slate-700 */
+            background-color: #334155;
+            /* slate-700 */
             padding: 1rem;
-            color: #e2e8f0; /* slate-200 */
+            color: #e2e8f0;
+            /* slate-200 */
             font-weight: bold;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
+
         #chat-messages {
             flex-grow: 1;
             padding: 1rem;
@@ -94,238 +109,461 @@
             flex-direction: column;
             gap: 0.75rem;
         }
+
         .chat-message {
             padding: 0.75rem 1rem;
             border-radius: 10px;
             max-width: 80%;
             line-height: 1.5;
         }
+
         .user-message {
-            background-color: #14b8a6; /* teal-500 */
+            background-color: #14b8a6;
+            /* teal-500 */
             color: white;
             align-self: flex-end;
             border-bottom-right-radius: 0;
         }
+
         .model-message {
-            background-color: #334155; /* slate-700 */
-            color: #cbd5e1; /* slate-300 */
+            background-color: #334155;
+            /* slate-700 */
+            color: #cbd5e1;
+            /* slate-300 */
             align-self: flex-start;
             border-bottom-left-radius: 0;
         }
+
         #chat-form {
             display: flex;
             padding: 1rem;
-            border-top: 1px solid #334155; /* slate-700 */
+            border-top: 1px solid #334155;
+            /* slate-700 */
         }
+
         #chat-input {
             flex-grow: 1;
-            background-color: #0f172a; /* slate-900 */
-            border: 1px solid #334155; /* slate-700 */
+            background-color: #0f172a;
+            /* slate-900 */
+            border: 1px solid #334155;
+            /* slate-700 */
             border-radius: 20px;
             padding: 0.5rem 1rem;
-            color: #e2e8f0; /* slate-200 */
+            color: #e2e8f0;
+            /* slate-200 */
         }
+
         #chat-input:focus {
             outline: none;
-            border-color: #14b8a6; /* teal-500 */
+            border-color: #14b8a6;
+            /* teal-500 */
         }
     </style>
 </head>
+
 <body class="antialiased selection:bg-teal-300 selection:text-teal-900">
     <div class="mx-auto min-h-screen max-w-screen-xl px-6 py-12 md:px-12 md:py-20 lg:px-24 lg:py-0">
         <div class="lg:flex lg:justify-between lg:gap-4">
             <header class="lg:sticky lg:top-0 lg:flex lg:max-h-screen lg:w-1/2 lg:flex-col lg:justify-between lg:py-24">
                 <div>
                     <h1 class="text-4xl font-bold tracking-tight text-slate-200 sm:text-5xl">Mohammed Aslam K U</h1>
-                    <h2 class="mt-3 text-lg font-medium tracking-tight text-slate-200 sm:text-xl">Technical Project Manager | Scrum Master</h2>
-                    <p class="mt-4 max-w-xs leading-normal">Delivering quality products, seamless digital experiences & growth – 7 years of expertise!</p>
+                    <h2 class="mt-3 text-lg font-medium tracking-tight text-slate-200 sm:text-xl">Technical Project
+                        Manager | Scrum Master</h2>
+                    <p class="mt-4 max-w-xs leading-normal">Delivering quality products, seamless digital experiences &
+                        growth – 7 years of expertise!</p>
                     <nav class="nav hidden lg:block" aria-label="In-page jump links">
                         <ul class="mt-16 w-max">
-                            <li><a class="group flex items-center py-3" href="#about"><span class="nav-indicator mr-4 h-px w-8 bg-slate-600"></span><span class="nav-text text-xs font-bold uppercase tracking-widest text-slate-500">About</span></a></li>
-                            <li><a class="group flex items-center py-3" href="#experience"><span class="nav-indicator mr-4 h-px w-8 bg-slate-600"></span><span class="nav-text text-xs font-bold uppercase tracking-widest text-slate-500">Experience</span></a></li>
-                            <li><a class="group flex items-center py-3" href="#projects"><span class="nav-indicator mr-4 h-px w-8 bg-slate-600"></span><span class="nav-text text-xs font-bold uppercase tracking-widest text-slate-500">Projects</span></a></li>
-                            <li><a class="group flex items-center py-3" href="#skills"><span class="nav-indicator mr-4 h-px w-8 bg-slate-600"></span><span class="nav-text text-xs font-bold uppercase tracking-widest text-slate-500">Skills</span></a></li>
-                            <li><a class="group flex items-center py-3" href="#achievements"><span class="nav-indicator mr-4 h-px w-8 bg-slate-600"></span><span class="nav-text text-xs font-bold uppercase tracking-widest text-slate-500">Achievements</span></a></li>
+                            <li><a class="group flex items-center py-3" href="#about"><span
+                                        class="nav-indicator mr-4 h-px w-8 bg-slate-600"></span><span
+                                        class="nav-text text-xs font-bold uppercase tracking-widest text-slate-500">About</span></a>
+                            </li>
+                            <li><a class="group flex items-center py-3" href="#experience"><span
+                                        class="nav-indicator mr-4 h-px w-8 bg-slate-600"></span><span
+                                        class="nav-text text-xs font-bold uppercase tracking-widest text-slate-500">Experience</span></a>
+                            </li>
+                            <li><a class="group flex items-center py-3" href="#projects"><span
+                                        class="nav-indicator mr-4 h-px w-8 bg-slate-600"></span><span
+                                        class="nav-text text-xs font-bold uppercase tracking-widest text-slate-500">Projects</span></a>
+                            </li>
+                            <li><a class="group flex items-center py-3" href="#skills"><span
+                                        class="nav-indicator mr-4 h-px w-8 bg-slate-600"></span><span
+                                        class="nav-text text-xs font-bold uppercase tracking-widest text-slate-500">Skills</span></a>
+                            </li>
+                            <li><a class="group flex items-center py-3" href="#achievements"><span
+                                        class="nav-indicator mr-4 h-px w-8 bg-slate-600"></span><span
+                                        class="nav-text text-xs font-bold uppercase tracking-widest text-slate-500">Achievements</span></a>
+                            </li>
                         </ul>
                     </nav>
                 </div>
                 <ul class="ml-1 mt-8 flex items-center" aria-label="Social media">
-                    <li class="mr-5 shrink-0 text-xs"><a class="block hover:text-slate-200" href="https://github.com/aslam301" target="_blank" rel="noreferrer noopener" aria-label="GitHub (opens in a new tab)" title="GitHub"><span class="sr-only">GitHub</span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="h-6 w-6" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg></a></li>
-                    <li class="mr-5 shrink-0 text-xs"><a class="block hover:text-slate-200" href="https://www.linkedin.com/in/aslam301" target="_blank" rel="noreferrer noopener" aria-label="LinkedIn (opens in a new tab)" title="LinkedIn"><span class="sr-only">LinkedIn</span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-6 w-6" aria-hidden="true"><path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"></path></svg></a></li>
-                     <li class="mr-5 shrink-0 text-xs"><a class="block hover:text-slate-200" href="https://aslam301.github.io/" target="_blank" rel="noreferrer noopener" aria-label="Website (opens in a new tab)" title="Website"><span class="sr-only">Website</span><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9V3m0 18a9 9 0 009-9m-9 9a9 9 0 00-9-9" /></svg></a></li>
+                    <li class="mr-5 shrink-0 text-xs"><a class="block hover:text-slate-200"
+                            href="https://github.com/aslam301" target="_blank" rel="noreferrer noopener"
+                            aria-label="GitHub (opens in a new tab)" title="GitHub"><span
+                                class="sr-only">GitHub</span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"
+                                fill="currentColor" class="h-6 w-6" aria-hidden="true">
+                                <path
+                                    d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+                                </path>
+                            </svg></a></li>
+                    <li class="mr-5 shrink-0 text-xs"><a class="block hover:text-slate-200"
+                            href="https://www.linkedin.com/in/aslam301" target="_blank" rel="noreferrer noopener"
+                            aria-label="LinkedIn (opens in a new tab)" title="LinkedIn"><span
+                                class="sr-only">LinkedIn</span><svg xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24" fill="currentColor" class="h-6 w-6" aria-hidden="true">
+                                <path
+                                    d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z">
+                                </path>
+                            </svg></a></li>
+                    <li class="mr-5 shrink-0 text-xs"><a class="block hover:text-slate-200"
+                            href="https://aslam301.github.io/" target="_blank" rel="noreferrer noopener"
+                            aria-label="Website (opens in a new tab)" title="Website"><span
+                                class="sr-only">Website</span><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6"
+                                fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9V3m0 18a9 9 0 009-9m-9 9a9 9 0 00-9-9" />
+                            </svg></a></li>
                 </ul>
             </header>
             <main id="content" class="pt-24 lg:w-1/2 lg:py-24">
                 <section id="about" class="mb-16 scroll-mt-16 md:mb-24 lg:mb-36 lg:scroll-mt-24" aria-label="About me">
-                    <div class="sticky top-0 z-20 -mx-6 mb-4 w-screen bg-slate-900/75 px-6 py-5 backdrop-blur md:-mx-12 md:px-12 lg:sr-only lg:relative lg:top-auto lg:mx-auto lg:w-full lg:px-0 lg:py-0 lg:opacity-0">
+                    <div
+                        class="sticky top-0 z-20 -mx-6 mb-4 w-screen bg-slate-900/75 px-6 py-5 backdrop-blur md:-mx-12 md:px-12 lg:sr-only lg:relative lg:top-auto lg:mx-auto lg:w-full lg:px-0 lg:py-0 lg:opacity-0">
                         <h2 class="text-sm font-bold uppercase tracking-widest text-slate-200 lg:sr-only">About</h2>
                     </div>
                     <div>
-                        <p class="mb-4">As a Technical Project Manager with over 7 years in software development and 5 years leading cross-functional projects, I have a proven track record of delivering results. Most recently, I spearheaded a 40-member team at Price.com, managing over 400 million product data points and achieving a 40% reduction in server load and operational costs.</p>
-                        <p class="mb-4">I am known for my Agile leadership, product scalability, and ability to align technical solutions with business goals. I am passionate about optimizing development lifecycles and mentoring teams, and I am actively working toward a future CTO role.</p>
+                        <p class="mb-4">As a Technical Project Manager with over 7 years in software development and 5
+                            years leading cross-functional projects, I have a proven track record of delivering results.
+                            Most recently, I spearheaded a 40-member team at Price.com, managing over 400 million
+                            product data points and achieving a 40% reduction in server load and operational costs.</p>
+                        <p class="mb-4">I am known for my Agile leadership, product scalability, and ability to align
+                            technical solutions with business goals. I am passionate about optimizing development
+                            lifecycles and mentoring teams, and I am actively working toward a future CTO role.</p>
                     </div>
                 </section>
-                <section id="experience" class="mb-16 scroll-mt-16 md:mb-24 lg:mb-36 lg:scroll-mt-24" aria-label="Work experience">
-                    <div class="sticky top-0 z-20 -mx-6 mb-4 w-screen bg-slate-900/75 px-6 py-5 backdrop-blur md:-mx-12 md:px-12 lg:sr-only lg:relative lg:top-auto lg:mx-auto lg:w-full lg:px-0 lg:py-0 lg:opacity-0">
-                        <h2 class="text-sm font-bold uppercase tracking-widest text-slate-200 lg:sr-only">Experience</h2>
+                <section id="experience" class="mb-16 scroll-mt-16 md:mb-24 lg:mb-36 lg:scroll-mt-24"
+                    aria-label="Work experience">
+                    <div
+                        class="sticky top-0 z-20 -mx-6 mb-4 w-screen bg-slate-900/75 px-6 py-5 backdrop-blur md:-mx-12 md:px-12 lg:sr-only lg:relative lg:top-auto lg:mx-auto lg:w-full lg:px-0 lg:py-0 lg:opacity-0">
+                        <h2 class="text-sm font-bold uppercase tracking-widest text-slate-200 lg:sr-only">Experience
+                        </h2>
                     </div>
                     <div>
                         <ol class="group/list">
                             <li class="mb-12">
-                                <div class="group relative grid pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50">
-                                    <div class="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-slate-800/50 lg:group-hover:shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] lg:group-hover:drop-shadow-lg"></div>
-                                    <header class="z-10 mb-2 mt-1 text-xs font-semibold uppercase tracking-wide text-slate-500 sm:col-span-2" aria-label="2023 to 2025">Nov 2023 – June 2025</header>
+                                <div
+                                    class="group relative grid pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50">
+                                    <div
+                                        class="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-slate-800/50 lg:group-hover:shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] lg:group-hover:drop-shadow-lg">
+                                    </div>
+                                    <header
+                                        class="z-10 mb-2 mt-1 text-xs font-semibold uppercase tracking-wide text-slate-500 sm:col-span-2"
+                                        aria-label="2023 to 2025">Nov 2023 – June 2025</header>
                                     <div class="z-10 sm:col-span-6">
                                         <h3 class="font-medium leading-snug text-slate-200">
-                                            <div><a class="inline-flex items-baseline font-medium leading-tight text-slate-200 hover:text-teal-300 focus-visible:text-teal-300 group/link text-base" href="https://price.com/" target="_blank" rel="noreferrer noopener" aria-label="Price.com (opens in a new tab)"><span>Technical Project Manager | Scrum Master · <span class="inline-block">Price.com</span></span></a></div>
+                                            <div><a class="inline-flex items-baseline font-medium leading-tight text-slate-200 hover:text-teal-300 focus-visible:text-teal-300 group/link text-base"
+                                                    href="https://price.com/" target="_blank" rel="noreferrer noopener"
+                                                    aria-label="Price.com (opens in a new tab)"><span>Technical Project
+                                                        Manager | Scrum Master · <span
+                                                            class="inline-block">Price.com</span></span></a></div>
                                         </h3>
-                                        <p class="mt-2 text-sm leading-normal">Led cross-continental Agile teams in managing over 400M+ data points, improving delivery predictability by 25% through optimized sprint ceremonies. Drove the integration of an AI performance module, cutting data processing time by 30%. Facilitated all Scrum ceremonies and presented technical roadmaps to C-suite executives.</p>
+                                        <p class="mt-2 text-sm leading-normal">Led cross-continental Agile teams in
+                                            managing over 400M+ data points, improving delivery predictability by 25%
+                                            through optimized sprint ceremonies. Drove the integration of an AI
+                                            performance module, cutting data processing time by 30%. Facilitated all
+                                            Scrum ceremonies and presented technical roadmaps to C-suite executives.</p>
                                     </div>
                                 </div>
                             </li>
                             <li class="mb-12">
-                                <div class="group relative grid pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50">
-                                    <div class="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-slate-800/50 lg:group-hover:shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] lg:group-hover:drop-shadow-lg"></div>
-                                    <header class="z-10 mb-2 mt-1 text-xs font-semibold uppercase tracking-wide text-slate-500 sm:col-span-2" aria-label="2022 to 2023">May 2022 – Nov 2023</header>
-                                    <div class="z-10 sm:col-span-6">
-                                        <h3 class="font-medium leading-snug text-slate-200">
-                                            <div><a class="inline-flex items-baseline font-medium leading-tight text-slate-200 hover:text-teal-300 focus-visible:text-teal-300 group/link text-base" href="#" aria-label="UFO Games Pvt Ltd"><span>Technical Project Manager | Scrum Master · <span class="inline-block">UFO Games Pvt Ltd</span></span></a></div>
-                                        </h3>
-                                        <p class="mt-2 text-sm leading-normal">Managed the end-to-end technical rebuild of a real-money gaming app, increasing DAU by 50%. Oversaw compliance and growth initiatives, boosting ARPU by 20%. Supported funding campaigns and directed the revamp of company websites.</p>
+                                <div
+                                    class="group relative grid pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50">
+                                    <div
+                                        class="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-slate-800/50 lg:group-hover:shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] lg:group-hover:drop-shadow-lg">
                                     </div>
-                                </div>
-                            </li>
-                             <li class="mb-12">
-                                <div class="group relative grid pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50">
-                                    <div class="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-slate-800/50 lg:group-hover:shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] lg:group-hover:drop-shadow-lg"></div>
-                                    <header class="z-10 mb-2 mt-1 text-xs font-semibold uppercase tracking-wide text-slate-500 sm:col-span-2" aria-label="2018 to 2022">Mar 2018 – May 2022</header>
+                                    <header
+                                        class="z-10 mb-2 mt-1 text-xs font-semibold uppercase tracking-wide text-slate-500 sm:col-span-2"
+                                        aria-label="2022 to 2023">May 2022 – Nov 2023</header>
                                     <div class="z-10 sm:col-span-6">
                                         <h3 class="font-medium leading-snug text-slate-200">
-                                            <div><a class="inline-flex items-baseline font-medium leading-tight text-slate-200 hover:text-teal-300 focus-visible:text-teal-300 group/link text-base" href="#" aria-label="NGN TECH"><span>Project Manager / PHP Developer · <span class="inline-block">NGN TECH</span></span></a></div>
+                                            <div><a class="inline-flex items-baseline font-medium leading-tight text-slate-200 hover:text-teal-300 focus-visible:text-teal-300 group/link text-base"
+                                                    href="#" aria-label="UFO Games Pvt Ltd"><span>Technical Project
+                                                        Manager | Scrum Master · <span class="inline-block">UFO Games
+                                                            Pvt Ltd</span></span></a></div>
                                         </h3>
-                                        <p class="mt-2 text-sm leading-normal">Managed full-cycle development for 10+ client platforms with a 95% on-time delivery rate. Coordinated full-stack teams to build solutions that cut client operational costs by up to 40%. Acted as the primary client liaison and engineered UX improvements that decreased user abandonment by 60%.</p>
+                                        <p class="mt-2 text-sm leading-normal">Managed the end-to-end technical rebuild
+                                            of a real-money gaming app, increasing DAU by 50%. Oversaw compliance and
+                                            growth initiatives, boosting ARPU by 20%. Supported funding campaigns and
+                                            directed the revamp of company websites.</p>
                                     </div>
                                 </div>
                             </li>
                             <li class="mb-12">
-    <div
-        class="group relative grid pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50">
-        <div
-            class="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-slate-800/50 lg:group-hover:shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] lg:group-hover:drop-shadow-lg">
-        </div>
-        <div class="mt-12">
-            <a class="inline-flex items-baseline font-medium leading-tight text-slate-200 hover:text-teal-300 focus-visible:text-teal-300 font-semibold text-slate-200 group/link text-base"
-                href="Resume_latest.pdf" target="_blank" rel="noreferrer noopener"
-                aria-label="View Full Résumé (opens in a new tab)">
-                <span>View Full
-                    <span class="inline-block">Résumé
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
-                            class="inline-block h-4 w-4 shrink-0 transition-transform group-hover/link:-translate-y-1 group-hover/link:translate-x-1 group-focus-visible/link:-translate-y-1 group-focus-visible/link:translate-x-1 motion-reduce:transition-none ml-1 translate-y-px"
-                            aria-hidden="true">
-                            <path fill-rule="evenodd"
-                                d="M5.22 14.78a.75.75 0 001.06 0l7.22-7.22v5.69a.75.75 0 001.5 0v-7.5a.75.75 0 00-.75-.75h-7.5a.75.75 0 000 1.5h5.69l-7.22 7.22a.75.75 0 000 1.06z"
-                                clip-rule="evenodd"></path>
-                        </svg>
-                    </span>
-                </span>
-            </a>
-        </div>
-    </div>
-</li>
+                                <div
+                                    class="group relative grid pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50">
+                                    <div
+                                        class="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-slate-800/50 lg:group-hover:shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] lg:group-hover:drop-shadow-lg">
+                                    </div>
+                                    <header
+                                        class="z-10 mb-2 mt-1 text-xs font-semibold uppercase tracking-wide text-slate-500 sm:col-span-2"
+                                        aria-label="2018 to 2022">Mar 2018 – May 2022</header>
+                                    <div class="z-10 sm:col-span-6">
+                                        <h3 class="font-medium leading-snug text-slate-200">
+                                            <div><a class="inline-flex items-baseline font-medium leading-tight text-slate-200 hover:text-teal-300 focus-visible:text-teal-300 group/link text-base"
+                                                    href="#" aria-label="NGN TECH"><span>Project Manager / PHP Developer
+                                                        · <span class="inline-block">NGN TECH</span></span></a></div>
+                                        </h3>
+                                        <p class="mt-2 text-sm leading-normal">Managed full-cycle development for 10+
+                                            client platforms with a 95% on-time delivery rate. Coordinated full-stack
+                                            teams to build solutions that cut client operational costs by up to 40%.
+                                            Acted as the primary client liaison and engineered UX improvements that
+                                            decreased user abandonment by 60%.</p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="mb-12">
+                                <div
+                                    class="group relative grid pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50">
+                                    <div
+                                        class="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-slate-800/50 lg:group-hover:shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] lg:group-hover:drop-shadow-lg">
+                                    </div>
+                                    <div class="mt-12">
+                                        <a class="inline-flex items-baseline font-medium leading-tight text-slate-200 hover:text-teal-300 focus-visible:text-teal-300 font-semibold text-slate-200 group/link text-base"
+                                            href="Aslam_Project-Manager.pdf" target="_blank" rel="noreferrer noopener"
+                                            aria-label="View Full Résumé (opens in a new tab)">
+                                            <span>View Full
+                                                <span class="inline-block">Résumé
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                                        fill="currentColor"
+                                                        class="inline-block h-4 w-4 shrink-0 transition-transform group-hover/link:-translate-y-1 group-hover/link:translate-x-1 group-focus-visible/link:-translate-y-1 group-focus-visible/link:translate-x-1 motion-reduce:transition-none ml-1 translate-y-px"
+                                                        aria-hidden="true">
+                                                        <path fill-rule="evenodd"
+                                                            d="M5.22 14.78a.75.75 0 001.06 0l7.22-7.22v5.69a.75.75 0 001.5 0v-7.5a.75.75 0 00-.75-.75h-7.5a.75.75 0 000 1.5h5.69l-7.22 7.22a.75.75 0 000 1.06z"
+                                                            clip-rule="evenodd"></path>
+                                                    </svg>
+                                                </span>
+                                            </span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </li>
                         </ol>
                     </div>
                 </section>
 
-                <section id="projects" class="mb-16 scroll-mt-16 md:mb-24 lg:mb-36 lg:scroll-mt-24" aria-label="Selected projects">
-                    <div class="sticky top-0 z-20 -mx-6 mb-4 w-screen bg-slate-900/75 px-6 py-5 backdrop-blur md:-mx-12 md:px-12 lg:sr-only lg:relative lg:top-auto lg:mx-auto lg:w-full lg:px-0 lg:py-0 lg:opacity-0">
+                <section id="projects" class="mb-16 scroll-mt-16 md:mb-24 lg:mb-36 lg:scroll-mt-24"
+                    aria-label="Selected projects">
+                    <div
+                        class="sticky top-0 z-20 -mx-6 mb-4 w-screen bg-slate-900/75 px-6 py-5 backdrop-blur md:-mx-12 md:px-12 lg:sr-only lg:relative lg:top-auto lg:mx-auto lg:w-full lg:px-0 lg:py-0 lg:opacity-0">
                         <h2 class="text-sm font-bold uppercase tracking-widest text-slate-200 lg:sr-only">Projects</h2>
                     </div>
                     <div>
                         <ul class="group/list">
                             <li class="mb-12">
-                                <div class="group relative grid gap-4 pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50">
-                                    <div class="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-slate-800/50 lg:group-hover:shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] lg:group-hover:drop-shadow-lg"></div>
-                                    <div class="z-10 sm:order-2 sm:col-span-6">
-                                        <h3><a class="inline-flex items-baseline font-medium leading-tight text-slate-200 hover:text-teal-300 focus-visible:text-teal-300 group/link text-base" href="#" aria-label="AI-Powered Accounting Software"><span>AI-Powered Accounting Software</span></a></h3>
-                                        <p class="mt-2 text-sm leading-normal">Directed a team to build an AI accounting tool that cut client accounting time by 70% and reduced development cycles by 25% through tight business-technical alignment.</p>
+                                <div
+                                    class="group relative grid gap-4 pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50">
+                                    <div
+                                        class="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-slate-800/50 lg:group-hover:shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] lg:group-hover:drop-shadow-lg">
                                     </div>
-                                    <img alt="AI-Powered Accounting Software" loading="lazy" width="200" height="48" decoding="async" data-nimg="1" class="aspect-video object-cover rounded border-2 border-slate-200/10 transition group-hover:border-slate-200/30 sm:order-1 sm:col-span-2 sm:translate-y-1" style="color:transparent" src="https://placehold.co/200x112/0f172a/94a3b8?text=AI+Accounting">
+                                    <div class="z-10 sm:order-2 sm:col-span-6">
+                                        <h3><a class="inline-flex items-baseline font-medium leading-tight text-slate-200 hover:text-teal-300 focus-visible:text-teal-300 group/link text-base"
+                                                href="#" aria-label="AI-Powered Accounting Software"><span>AI-Powered
+                                                    Accounting Software</span></a></h3>
+                                        <p class="mt-2 text-sm leading-normal">Directed a team to build an AI accounting
+                                            tool that cut client accounting time by 70% and reduced development cycles
+                                            by 25% through tight business-technical alignment.</p>
+                                    </div>
+                                    <img alt="AI-Powered Accounting Software" loading="lazy" width="200" height="48"
+                                        decoding="async" data-nimg="1"
+                                        class="aspect-video object-cover rounded border-2 border-slate-200/10 transition group-hover:border-slate-200/30 sm:order-1 sm:col-span-2 sm:translate-y-1"
+                                        style="color:transparent"
+                                        src="https://placehold.co/200x112/0f172a/94a3b8?text=AI+Accounting">
                                 </div>
                             </li>
                             <li class="mb-12">
-                                <div class="group relative grid gap-4 pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50">
-                                    <div class="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-slate-800/50 lg:group-hover:shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] lg:group-hover:drop-shadow-lg"></div>
-                                    <div class="z-10 sm:order-2 sm:col-span-6">
-                                        <h3><a class="inline-flex items-baseline font-medium leading-tight text-slate-200 hover:text-teal-300 focus-visible:text-teal-300 group/link text-base" href="#" aria-label="Real Estate Platform – Canadian Market"><span>Real Estate Platform – Canadian Market</span></a></h3>
-                                        <p class="mt-2 text-sm leading-normal">Managed a 20+ member team to develop one of Canada’s leading real estate apps, overseeing the full project lifecycle to significantly scale user adoption in a competitive market.</p>
+                                <div
+                                    class="group relative grid gap-4 pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50">
+                                    <div
+                                        class="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-slate-800/50 lg:group-hover:shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] lg:group-hover:drop-shadow-lg">
                                     </div>
-                                     <img alt="Real Estate Platform" loading="lazy" width="200" height="48" decoding="async" data-nimg="1" class="aspect-video object-cover rounded border-2 border-slate-200/10 transition group-hover:border-slate-200/30 sm:order-1 sm:col-span-2 sm:translate-y-1" style="color:transparent" src="https://placehold.co/200x112/0f172a/94a3b8?text=Real+Estate">
-                                </div>
-                            </li>
-                             <li class="mb-12">
-                                <div class="group relative grid gap-4 pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50">
-                                    <div class="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-slate-800/50 lg:group-hover:shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] lg:group-hover:drop-shadow-lg"></div>
                                     <div class="z-10 sm:order-2 sm:col-span-6">
-                                        <h3><a class="inline-flex items-baseline font-medium leading-tight text-slate-200 hover:text-teal-300 focus-visible:text-teal-300 group/link text-base" href="#" aria-label="AI Project Management Assistant"><span>AI Project Management Assistant</span></a></h3>
-                                        <p class="mt-2 text-sm leading-normal">Built a self-hosted AI project management tool using PHP and OpenAI APIs to automate reports, featuring a lightweight, JSON-based data storage system.</p>
+                                        <h3><a class="inline-flex items-baseline font-medium leading-tight text-slate-200 hover:text-teal-300 focus-visible:text-teal-300 group/link text-base"
+                                                href="#" aria-label="Real Estate Platform – Canadian Market"><span>Real
+                                                    Estate Platform – Canadian Market</span></a></h3>
+                                        <p class="mt-2 text-sm leading-normal">Managed a 20+ member team to develop one
+                                            of Canada’s leading real estate apps, overseeing the full project lifecycle
+                                            to significantly scale user adoption in a competitive market.</p>
                                     </div>
-                                     <img alt="AI PM Assistant" loading="lazy" width="200" height="48" decoding="async" data-nimg="1" class="aspect-video object-cover rounded border-2 border-slate-200/10 transition group-hover:border-slate-200/30 sm:order-1 sm:col-span-2 sm:translate-y-1" style="color:transparent" src="https://placehold.co/200x112/0f172a/94a3b8?text=AI+PM+Tool">
+                                    <img alt="Real Estate Platform" loading="lazy" width="200" height="48"
+                                        decoding="async" data-nimg="1"
+                                        class="aspect-video object-cover rounded border-2 border-slate-200/10 transition group-hover:border-slate-200/30 sm:order-1 sm:col-span-2 sm:translate-y-1"
+                                        style="color:transparent"
+                                        src="https://placehold.co/200x112/0f172a/94a3b8?text=Real+Estate">
                                 </div>
                             </li>
                             <li class="mb-12">
-                                <div class="group relative grid gap-4 pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50">
-                                    <div class="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-slate-800/50 lg:group-hover:shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] lg:group-hover:drop-shadow-lg"></div>
-                                    <div class="z-10 sm:order-2 sm:col-span-6">
-                                        <h3><a class="inline-flex items-baseline font-medium leading-tight text-slate-200 hover:text-teal-300 focus-visible:text-teal-300 group/link text-base" href="#" aria-label="Zomato / Swiggy Clone"><span>Zomato / Swiggy Clone</span></a></h3>
-                                        <p class="mt-2 text-sm leading-normal">Took over lead development for a food delivery app, successfully building and deploying the production-ready Flutter application on both Android and iOS.</p>
+                                <div
+                                    class="group relative grid gap-4 pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50">
+                                    <div
+                                        class="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-slate-800/50 lg:group-hover:shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] lg:group-hover:drop-shadow-lg">
                                     </div>
-                                     <img alt="Food Delivery App Clone" loading="lazy" width="200" height="48" decoding="async" data-nimg="1" class="aspect-video object-cover rounded border-2 border-slate-200/10 transition group-hover:border-slate-200/30 sm:order-1 sm:col-span-2 sm:translate-y-1" style="color:transparent" src="https://placehold.co/200x112/0f172a/94a3b8?text=Food+App">
+                                    <div class="z-10 sm:order-2 sm:col-span-6">
+                                        <h3><a class="inline-flex items-baseline font-medium leading-tight text-slate-200 hover:text-teal-300 focus-visible:text-teal-300 group/link text-base"
+                                                href="#" aria-label="AI Project Management Assistant"><span>AI Project
+                                                    Management Assistant</span></a></h3>
+                                        <p class="mt-2 text-sm leading-normal">Built a self-hosted AI project management
+                                            tool using PHP and OpenAI APIs to automate reports, featuring a lightweight,
+                                            JSON-based data storage system.</p>
+                                    </div>
+                                    <img alt="AI PM Assistant" loading="lazy" width="200" height="48" decoding="async"
+                                        data-nimg="1"
+                                        class="aspect-video object-cover rounded border-2 border-slate-200/10 transition group-hover:border-slate-200/30 sm:order-1 sm:col-span-2 sm:translate-y-1"
+                                        style="color:transparent"
+                                        src="https://placehold.co/200x112/0f172a/94a3b8?text=AI+PM+Tool">
                                 </div>
                             </li>
-                             <li class="mb-12">
-                                <div class="group relative grid gap-4 pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50">
-                                    <div class="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-slate-800/50 lg:group-hover:shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] lg:group-hover:drop-shadow-lg"></div>
-                                    <div class="z-10 sm:order-2 sm:col-span-6">
-                                        <h3><a class="inline-flex items-baseline font-medium leading-tight text-slate-200 hover:text-teal-300 focus-visible:text-teal-300 group/link text-base" href="#" aria-label="E-commerce for Indian Force Uniforms"><span>E-commerce for Indian Force Uniforms</span></a></h3>
-                                        <p class="mt-2 text-sm leading-normal">Developed a niche WordPress e-commerce site and used digital marketing to establish it as a top online destination for Indian uniform procurement.</p>
+                            <li class="mb-12">
+                                <div
+                                    class="group relative grid gap-4 pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50">
+                                    <div
+                                        class="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-slate-800/50 lg:group-hover:shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] lg:group-hover:drop-shadow-lg">
                                     </div>
-                                     <img alt="Uniform E-commerce" loading="lazy" width="200" height="48" decoding="async" data-nimg="1" class="aspect-video object-cover rounded border-2 border-slate-200/10 transition group-hover:border-slate-200/30 sm:order-1 sm:col-span-2 sm:translate-y-1" style="color:transparent" src="https://placehold.co/200x112/0f172a/94a3b8?text=Uniform+Store">
+                                    <div class="z-10 sm:order-2 sm:col-span-6">
+                                        <h3><a class="inline-flex items-baseline font-medium leading-tight text-slate-200 hover:text-teal-300 focus-visible:text-teal-300 group/link text-base"
+                                                href="#" aria-label="Zomato / Swiggy Clone"><span>Zomato / Swiggy
+                                                    Clone</span></a></h3>
+                                        <p class="mt-2 text-sm leading-normal">Took over lead development for a food
+                                            delivery app, successfully building and deploying the production-ready
+                                            Flutter application on both Android and iOS.</p>
+                                    </div>
+                                    <img alt="Food Delivery App Clone" loading="lazy" width="200" height="48"
+                                        decoding="async" data-nimg="1"
+                                        class="aspect-video object-cover rounded border-2 border-slate-200/10 transition group-hover:border-slate-200/30 sm:order-1 sm:col-span-2 sm:translate-y-1"
+                                        style="color:transparent"
+                                        src="https://placehold.co/200x112/0f172a/94a3b8?text=Food+App">
+                                </div>
+                            </li>
+                            <li class="mb-12">
+                                <div
+                                    class="group relative grid gap-4 pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50">
+                                    <div
+                                        class="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-slate-800/50 lg:group-hover:shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] lg:group-hover:drop-shadow-lg">
+                                    </div>
+                                    <div class="z-10 sm:order-2 sm:col-span-6">
+                                        <h3><a class="inline-flex items-baseline font-medium leading-tight text-slate-200 hover:text-teal-300 focus-visible:text-teal-300 group/link text-base"
+                                                href="#"
+                                                aria-label="E-commerce for Indian Force Uniforms"><span>E-commerce for
+                                                    Indian Force Uniforms</span></a></h3>
+                                        <p class="mt-2 text-sm leading-normal">Developed a niche WordPress e-commerce
+                                            site and used digital marketing to establish it as a top online destination
+                                            for Indian uniform procurement.</p>
+                                    </div>
+                                    <img alt="Uniform E-commerce" loading="lazy" width="200" height="48"
+                                        decoding="async" data-nimg="1"
+                                        class="aspect-video object-cover rounded border-2 border-slate-200/10 transition group-hover:border-slate-200/30 sm:order-1 sm:col-span-2 sm:translate-y-1"
+                                        style="color:transparent"
+                                        src="https://placehold.co/200x112/0f172a/94a3b8?text=Uniform+Store">
                                 </div>
                             </li>
                         </ul>
                     </div>
                 </section>
                 <section id="skills" class="mb-16 scroll-mt-16 md:mb-24 lg:mb-36 lg:scroll-mt-24" aria-label="Skills">
-                     <div class="sticky top-0 z-20 -mx-6 mb-4 w-screen bg-slate-900/75 px-6 py-5 backdrop-blur md:-mx-12 md:px-12 lg:sr-only lg:relative lg:top-auto lg:mx-auto lg:w-full lg:px-0 lg:py-0 lg:opacity-0">
+                    <div
+                        class="sticky top-0 z-20 -mx-6 mb-4 w-screen bg-slate-900/75 px-6 py-5 backdrop-blur md:-mx-12 md:px-12 lg:sr-only lg:relative lg:top-auto lg:mx-auto lg:w-full lg:px-0 lg:py-0 lg:opacity-0">
                         <h2 class="text-sm font-bold uppercase tracking-widest text-slate-200 lg:sr-only">Skills</h2>
                     </div>
                     <div>
                         <ul class="flex flex-wrap" aria-label="Technologies used">
-                            <li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-teal-400/10 px-3 py-1 text-xs font-medium leading-5 text-teal-300">Agile/Scrum Methodologies</div></li>
-                            <li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-teal-400/10 px-3 py-1 text-xs font-medium leading-5 text-teal-300">Sprint Planning</div></li>
-                            <li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-teal-400/10 px-3 py-1 text-xs font-medium leading-5 text-teal-300">Roadmapping</div></li>
-                            <li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-teal-400/10 px-3 py-1 text-xs font-medium leading-5 text-teal-300">Backlog Prioritization</div></li>
-                            <li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-teal-400/10 px-3 py-1 text-xs font-medium leading-5 text-teal-300">Product Lifecycle Management</div></li>
-                            <li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-teal-400/10 px-3 py-1 text-xs font-medium leading-5 text-teal-300">Risk Management</div></li>
-                            <li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-teal-400/10 px-3 py-1 text-xs font-medium leading-5 text-teal-300">Stakeholder Collaboration</div></li>
-                            <li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-teal-400/10 px-3 py-1 text-xs font-medium leading-5 text-teal-300">AI Integration</div></li>
-                             <li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-teal-400/10 px-3 py-1 text-xs font-medium leading-5 text-teal-300">OpenAI API</div></li>
-                            <li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-teal-400/10 px-3 py-1 text-xs font-medium leading-5 text-teal-300">JIRA</div></li>
-                            <li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-teal-400/10 px-3 py-1 text-xs font-medium leading-5 text-teal-300">Figma</div></li>
-                             <li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-teal-400/10 px-3 py-1 text-xs font-medium leading-5 text-teal-300">AWS</div></li>
-                            <li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-teal-400/10 px-3 py-1 text-xs font-medium leading-5 text-teal-300">PHP Laravel</div></li>
-                            <li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-teal-400/10 px-3 py-1 text-xs font-medium leading-5 text-teal-300">Python</div></li>
-                             <li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-teal-400/10 px-3 py-1 text-xs font-medium leading-5 text-teal-300">Flutter</div></li>
+                            <li class="mr-1.5 mt-2">
+                                <div
+                                    class="flex items-center rounded-full bg-teal-400/10 px-3 py-1 text-xs font-medium leading-5 text-teal-300">
+                                    Agile/Scrum Methodologies</div>
+                            </li>
+                            <li class="mr-1.5 mt-2">
+                                <div
+                                    class="flex items-center rounded-full bg-teal-400/10 px-3 py-1 text-xs font-medium leading-5 text-teal-300">
+                                    Sprint Planning</div>
+                            </li>
+                            <li class="mr-1.5 mt-2">
+                                <div
+                                    class="flex items-center rounded-full bg-teal-400/10 px-3 py-1 text-xs font-medium leading-5 text-teal-300">
+                                    Roadmapping</div>
+                            </li>
+                            <li class="mr-1.5 mt-2">
+                                <div
+                                    class="flex items-center rounded-full bg-teal-400/10 px-3 py-1 text-xs font-medium leading-5 text-teal-300">
+                                    Backlog Prioritization</div>
+                            </li>
+                            <li class="mr-1.5 mt-2">
+                                <div
+                                    class="flex items-center rounded-full bg-teal-400/10 px-3 py-1 text-xs font-medium leading-5 text-teal-300">
+                                    Product Lifecycle Management</div>
+                            </li>
+                            <li class="mr-1.5 mt-2">
+                                <div
+                                    class="flex items-center rounded-full bg-teal-400/10 px-3 py-1 text-xs font-medium leading-5 text-teal-300">
+                                    Risk Management</div>
+                            </li>
+                            <li class="mr-1.5 mt-2">
+                                <div
+                                    class="flex items-center rounded-full bg-teal-400/10 px-3 py-1 text-xs font-medium leading-5 text-teal-300">
+                                    Stakeholder Collaboration</div>
+                            </li>
+                            <li class="mr-1.5 mt-2">
+                                <div
+                                    class="flex items-center rounded-full bg-teal-400/10 px-3 py-1 text-xs font-medium leading-5 text-teal-300">
+                                    AI Integration</div>
+                            </li>
+                            <li class="mr-1.5 mt-2">
+                                <div
+                                    class="flex items-center rounded-full bg-teal-400/10 px-3 py-1 text-xs font-medium leading-5 text-teal-300">
+                                    OpenAI API</div>
+                            </li>
+                            <li class="mr-1.5 mt-2">
+                                <div
+                                    class="flex items-center rounded-full bg-teal-400/10 px-3 py-1 text-xs font-medium leading-5 text-teal-300">
+                                    JIRA</div>
+                            </li>
+                            <li class="mr-1.5 mt-2">
+                                <div
+                                    class="flex items-center rounded-full bg-teal-400/10 px-3 py-1 text-xs font-medium leading-5 text-teal-300">
+                                    Figma</div>
+                            </li>
+                            <li class="mr-1.5 mt-2">
+                                <div
+                                    class="flex items-center rounded-full bg-teal-400/10 px-3 py-1 text-xs font-medium leading-5 text-teal-300">
+                                    AWS</div>
+                            </li>
+                            <li class="mr-1.5 mt-2">
+                                <div
+                                    class="flex items-center rounded-full bg-teal-400/10 px-3 py-1 text-xs font-medium leading-5 text-teal-300">
+                                    PHP Laravel</div>
+                            </li>
+                            <li class="mr-1.5 mt-2">
+                                <div
+                                    class="flex items-center rounded-full bg-teal-400/10 px-3 py-1 text-xs font-medium leading-5 text-teal-300">
+                                    Python</div>
+                            </li>
+                            <li class="mr-1.5 mt-2">
+                                <div
+                                    class="flex items-center rounded-full bg-teal-400/10 px-3 py-1 text-xs font-medium leading-5 text-teal-300">
+                                    Flutter</div>
+                            </li>
                         </ul>
                     </div>
                 </section>
-                 <section id="achievements" class="mb-16 scroll-mt-16 md:mb-24 lg:mb-36 lg:scroll-mt-24" aria-label="Notable Info & Achievements">
-                     <div class="sticky top-0 z-20 -mx-6 mb-4 w-screen bg-slate-900/75 px-6 py-5 backdrop-blur md:-mx-12 md:px-12 lg:sr-only lg:relative lg:top-auto lg:mx-auto lg:w-full lg:px-0 lg:py-0 lg:opacity-0">
-                        <h2 class="text-sm font-bold uppercase tracking-widest text-slate-200 lg:sr-only">Notable Info & Achievements</h2>
+                <section id="achievements" class="mb-16 scroll-mt-16 md:mb-24 lg:mb-36 lg:scroll-mt-24"
+                    aria-label="Notable Info & Achievements">
+                    <div
+                        class="sticky top-0 z-20 -mx-6 mb-4 w-screen bg-slate-900/75 px-6 py-5 backdrop-blur md:-mx-12 md:px-12 lg:sr-only lg:relative lg:top-auto lg:mx-auto lg:w-full lg:px-0 lg:py-0 lg:opacity-0">
+                        <h2 class="text-sm font-bold uppercase tracking-widest text-slate-200 lg:sr-only">Notable Info &
+                            Achievements</h2>
                     </div>
                     <div>
                         <ul class="list-disc pl-5">
-                            <li class="mb-2">Pursuing PMP Certificate from PMI Institute - Expected to finish by 2025.</li>
+                            <li class="mb-2">Pursuing PMP Certificate from PMI Institute - Expected to finish by 2025.
+                            </li>
                             <li class="mb-2">Keeping up to date with latest AI & ML advancements.</li>
                             <li class="mb-2">Holder of a Hardware and Networking Diploma certificate.</li>
                             <li class="mb-2">Knowledgeable in CCNA (Routing and Switching), MCSE & RHCE.</li>
@@ -333,7 +571,18 @@
                     </div>
                 </section>
                 <footer class="max-w-md pb-16 text-sm text-slate-500 sm:pb-0">
-                    <p>Loosely designed in <a href="https://www.figma.com/" class="font-medium text-slate-400 hover:text-teal-300 focus-visible:text-teal-300" target="_blank" rel="noreferrer noopener">Figma</a> and coded in <a href="https://code.visualstudio.com/" class="font-medium text-slate-400 hover:text-teal-300 focus-visible:text-teal-300" target="_blank" rel="noreferrer noopener">Visual Studio Code</a> by yours truly. Built with <a href="https://tailwindcss.com/" class="font-medium text-slate-400 hover:text-teal-300 focus-visible:text-teal-300" target="_blank" rel="noreferrer noopener">Tailwind CSS</a>. All text is set in the <a href="https://rsms.me/inter/" class="font-medium text-slate-400 hover:text-teal-300 focus-visible:text-teal-300" target="_blank" rel="noreferrer noopener">Inter</a> typeface.</p>
+                    <p>Loosely designed in <a href="https://www.figma.com/"
+                            class="font-medium text-slate-400 hover:text-teal-300 focus-visible:text-teal-300"
+                            target="_blank" rel="noreferrer noopener">Figma</a> and coded in <a
+                            href="https://code.visualstudio.com/"
+                            class="font-medium text-slate-400 hover:text-teal-300 focus-visible:text-teal-300"
+                            target="_blank" rel="noreferrer noopener">Visual Studio Code</a> by yours truly. Built with
+                        <a href="https://tailwindcss.com/"
+                            class="font-medium text-slate-400 hover:text-teal-300 focus-visible:text-teal-300"
+                            target="_blank" rel="noreferrer noopener">Tailwind CSS</a>. All text is set in the <a
+                            href="https://rsms.me/inter/"
+                            class="font-medium text-slate-400 hover:text-teal-300 focus-visible:text-teal-300"
+                            target="_blank" rel="noreferrer noopener">Inter</a> typeface.</p>
                 </footer>
             </main>
         </div>
@@ -355,7 +604,9 @@
         </div>
         <button id="chat-button">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 20 20" fill="currentColor">
-                <path fill-rule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.839 8.839 0 01-4.082-.978L2 17.632V13.5A7.962 7.962 0 012 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM4.832 14.326l.886.443A6.838 6.838 0 0010 15c3.313 0 6-2.686 6-6s-2.687-6-6-6-6 2.686-6 6c0 1.47.527 2.822 1.423 3.896l.443.543-.28.842-1.42 4.258 3.235-1.617z" clip-rule="evenodd" />
+                <path fill-rule="evenodd"
+                    d="M18 10c0 3.866-3.582 7-8 7a8.839 8.839 0 01-4.082-.978L2 17.632V13.5A7.962 7.962 0 012 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM4.832 14.326l.886.443A6.838 6.838 0 0010 15c3.313 0 6-2.686 6-6s-2.687-6-6-6-6 2.686-6 6c0 1.47.527 2.822 1.423 3.896l.443.543-.28.842-1.42 4.258 3.235-1.617z"
+                    clip-rule="evenodd" />
             </svg>
         </button>
     </div>
@@ -432,7 +683,7 @@
 
             addMessage(userInput, 'user');
             chatInput.value = '';
-            
+
             const loader = addMessage('...', 'model', true);
 
             try {
@@ -450,9 +701,9 @@
         function addMessage(text, sender, isLoading = false) {
             const messageElement = document.createElement('div');
             messageElement.classList.add('chat-message', `${sender}-message`);
-            
+
             if (isLoading) {
-                 messageElement.innerHTML = '<div class="flex items-center justify-center gap-1"><span class="h-2 w-2 bg-slate-400 rounded-full animate-bounce [animation-delay:-0.3s]"></span><span class="h-2 w-2 bg-slate-400 rounded-full animate-bounce [animation-delay:-0.15s]"></span><span class="h-2 w-2 bg-slate-400 rounded-full animate-bounce"></span></div>';
+                messageElement.innerHTML = '<div class="flex items-center justify-center gap-1"><span class="h-2 w-2 bg-slate-400 rounded-full animate-bounce [animation-delay:-0.3s]"></span><span class="h-2 w-2 bg-slate-400 rounded-full animate-bounce [animation-delay:-0.15s]"></span><span class="h-2 w-2 bg-slate-400 rounded-full animate-bounce"></span></div>';
             } else {
                 messageElement.textContent = text;
             }
@@ -461,14 +712,14 @@
             chatMessages.scrollTop = chatMessages.scrollHeight;
             return messageElement;
         }
-        
+
         // --- Gemini API Call ---
         async function callGeminiForChat(userInput) {
             chatHistory.push({ role: "user", parts: [{ text: userInput }] });
 
             const apiKey = ""; // Leave empty
             const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
-            
+
             const payload = {
                 contents: [
                     { role: "user", parts: [{ text: systemPrompt }] },
@@ -487,7 +738,7 @@
                 if (!response.ok) throw new Error(`API call failed: ${response.status}`);
 
                 const result = await response.json();
-                
+
                 if (result.candidates && result.candidates.length > 0) {
                     const modelResponseText = result.candidates[0].content.parts[0].text;
                     chatHistory.push({ role: "model", parts: [{ text: modelResponseText }] });
@@ -535,4 +786,5 @@
         document.querySelector('nav li a[href="#about"]').classList.add('active');
     </script>
 </body>
+
 </html>
