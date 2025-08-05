@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Dashboard: A Strategic Pivot to Computer Vision</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Calm Harmony -->
+    <!-- Application Structure Plan: A top-down, interactive dashboard structure is used instead of a linear report. It begins with a high-level summary and key recommendations (The "What" & "Why"). It then allows users to explore specific verticals through a tabbed interface ("Core Applications"), visualize the GTM and team structure ("The Roadmap"), and understand the market and ethical considerations. This non-linear, thematic approach allows stakeholders to quickly access the information most relevant to them, making the dense report more digestible and supporting strategic decision-making rather than simple reading. User flow is guided by a sticky navigation bar, encouraging exploration across these key strategic pillars. -->
+    <!-- Visualization & Content Choices: 
+        - Market Growth (Report Info) -> Goal: Compare -> Viz: Bar Chart (Chart.js) -> Interaction: Hover tooltips -> Justification: Clearly shows the significant projected increase, making the opportunity tangible.
+        - Ethical Bias (Report Info) -> Goal: Compare -> Viz: Bar Chart (Chart.js) -> Interaction: Hover tooltips -> Justification: A stark, quantitative visualization of the "Gender Shades" study is more impactful than text alone for demonstrating the severity of the bias issue.
+        - Core Verticals (Report Info) -> Goal: Organize/Inform -> Viz: Tabbed Interface (HTML/JS) -> Interaction: Click tabs to reveal content -> Justification: Manages complexity by chunking information. Prevents overwhelming the user with all case studies at once; promotes focused exploration.
+        - GTM Strategy (Report Info) -> Goal: Change/Process -> Viz: Horizontal Timeline (HTML/CSS) -> Interaction: Static visual -> Justification: Clearly illustrates the phased "Partner-Then-Build" approach over time.
+        - Team Structure (Report Info) -> Goal: Organize -> Viz: Card Layout (HTML/Tailwind) -> Interaction: Click to expand -> Justification: Introduces the key roles in a digestible format, with progressive disclosure for more detailed responsibilities.
+        - CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* slate-50 */
+            color: #1e293b; /* slate-800 */
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 320px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        .nav-link {
+            transition: color 0.3s, border-bottom-color 0.3s;
+        }
+        .nav-link.active, .nav-link:hover {
+            color: #2563eb; /* blue-600 */
+            border-bottom-color: #2563eb;
+        }
+        .tab-button.active {
+            background-color: #2563eb;
+            color: #ffffff;
+        }
+        .tab-button {
+            transition: background-color 0.3s, color 0.3s;
+        }
+        [x-cloak] { display: none !important; }
+    </style>
+</head>
+<body x-data="dashboardData()" @update-active-section.window="activeSection = $event.detail">
+
+    <header class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex-shrink-0">
+                    <h1 class="text-xl font-bold text-slate-900">CV Strategy Dashboard</h1>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#strategy" @click="activeSection = 'strategy'" :class="{ 'active': activeSection === 'strategy' }" class="nav-link text-gray-600 px-3 py-2 rounded-md text-sm font-medium border-b-2 border-transparent">Strategic Pivot</a>
+                        <a href="#opportunity" @click="activeSection = 'opportunity'" :class="{ 'active': activeSection === 'opportunity' }" class="nav-link text-gray-600 px-3 py-2 rounded-md text-sm font-medium border-b-2 border-transparent">Market Opportunity</a>
+                        <a href="#applications" @click="activeSection = 'applications'" :class="{ 'active': activeSection === 'applications' }" class="nav-link text-gray-600 px-3 py-2 rounded-md text-sm font-medium border-b-2 border-transparent">Core Applications</a>
+                        <a href="#roadmap" @click="activeSection = 'roadmap'" :class="{ 'active': activeSection === 'roadmap' }" class="nav-link text-gray-600 px-3 py-2 rounded-md text-sm font-medium border-b-2 border-transparent">Roadmap</a>
+                        <a href="#ethics" @click="activeSection = 'ethics'" :class="{ 'active': activeSection === 'ethics' }" class="nav-link text-gray-600 px-3 py-2 rounded-md text-sm font-medium border-b-2 border-transparent">Ethical Imperative</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+
+        <section id="strategy" class="py-12 md:py-16">
+            <div class="text-center max-w-4xl mx-auto">
+                <h2 class="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">Pivoting to a New Paradigm: The Computer Vision Imperative</h2>
+                <p class="mt-4 text-lg text-slate-600">This dashboard outlines a strategic pivot into the computer vision market. It's not just an avenue for growth, but a necessary evolution to maintain leadership in an AI-driven landscape. Below are the core recommendations to guide this transformation.</p>
+            </div>
+
+            <div class="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+                <div class="bg-white p-6 rounded-xl shadow-lg transition-all hover:shadow-xl hover:-translate-y-1">
+                    <div class="flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 text-blue-600 mb-4">
+                        <span class="text-2xl">⚓</span>
+                    </div>
+                    <h3 class="text-lg font-semibold text-slate-900">Focus on Maritime & Logistics</h3>
+                    <p class="mt-2 text-slate-600">Target a "blue ocean" opportunity where our domain expertise provides a significant competitive advantage. Solve high-cost problems like cargo inspection and port security.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg transition-all hover:shadow-xl hover:-translate-y-1">
+                    <div class="flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 text-blue-600 mb-4">
+                        <span class="text-2xl">🤝</span>
+                    </div>
+                    <h3 class="text-lg font-semibold text-slate-900">Partner-Then-Build</h3>
+                    <p class="mt-2 text-slate-600">Accelerate time-to-market by leveraging platforms like Roboflow and AWS. Gain market traction and unique data before building proprietary IP.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg transition-all hover:shadow-xl hover:-translate-y-1">
+                    <div class="flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 text-blue-600 mb-4">
+                        <span class="text-2xl">✨</span>
+                    </div>
+                    <h3 class="text-lg font-semibold text-slate-900">Enhance Existing Products</h3>
+                    <p class="mt-2 text-slate-600">Use CV to power next-gen AR/VR interfaces and create more intuitive, visual-search-driven AI recommenders.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg transition-all hover:shadow-xl hover:-translate-y-1">
+                    <div class="flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 text-blue-600 mb-4">
+                        <span class="text-2xl">🛡️</span>
+                    </div>
+                    <h3 class="text-lg font-semibold text-slate-900">Champion Ethical AI</h3>
+                    <p class="mt-2 text-slate-600">Turn the risk of AI bias into a competitive advantage. Build a trusted, transparent brand attractive to enterprise and government clients.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg transition-all hover:shadow-xl hover:-translate-y-1">
+                    <div class="flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 text-blue-600 mb-4">
+                        <span class="text-2xl">🚀</span>
+                    </div>
+                    <h3 class="text-lg font-semibold text-slate-900">Plan for a Multimodal Future</h3>
+                    <p class="mt-2 text-slate-600">Evolve from pure CV towards the next frontier: AI that fuses vision, language, and audio for richer, context-aware solutions.</p>
+                </div>
+                 <div class="bg-white p-6 rounded-xl shadow-lg transition-all hover:shadow-xl hover:-translate-y-1">
+                    <div class="flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 text-blue-600 mb-4">
+                        <span class="text-2xl">👥</span>
+                    </div>
+                    <h3 class="text-lg font-semibold text-slate-900">Structure for Success</h3>
+                    <p class="mt-2 text-slate-600">Start with a centralized "Center of Excellence" to build a cohesive skillset and culture, ensuring alignment and rapid initial progress.</p>
+                </div>
+            </div>
+        </section>
+
+        <hr class="my-12 border-slate-200">
+
+        <section id="opportunity" class="py-12 md:py-16">
+            <div class="text-center max-w-4xl mx-auto">
+                <h2 class="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">Quantifying the Market Opportunity</h2>
+                <p class="mt-4 text-lg text-slate-600">The strategic pivot is underpinned by a compelling economic case. The market is not only large but is expanding at a rapid pace, with tangible impacts on business productivity and efficiency that create clear ROI for customers.</p>
+            </div>
+
+            <div class="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-5 items-start">
+                <div class="lg:col-span-3 bg-white p-6 rounded-xl shadow-lg">
+                    <h3 class="text-lg font-semibold text-slate-900 mb-1">Visual Search Market Growth</h3>
+                    <p class="text-slate-600 mb-4">This single sub-domain highlights the massive overall market opportunity, projected to more than double in five years.</p>
+                    <div class="chart-container">
+                        <canvas id="marketGrowthChart"></canvas>
+                    </div>
+                </div>
+                <div class="lg:col-span-2 space-y-4">
+                     <div class="bg-white p-6 rounded-xl shadow-lg">
+                        <h3 class="text-lg font-semibold text-slate-900">Productivity Gains</h3>
+                        <p class="mt-2 text-slate-600">AI implementation can increase overall business productivity by up to <strong class="text-blue-600">40%</strong> by automating repetitive tasks.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-lg">
+                        <h3 class="text-lg font-semibold text-slate-900">Efficiency Gains</h3>
+                        <p class="mt-2 text-slate-600">AI-based threat detection systems identify attacks <strong class="text-blue-600">85% faster</strong> than traditional tools, reducing risk and saving costs.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <hr class="my-12 border-slate-200">
+
+        <section id="applications" class="py-12 md:py-16" x-data="{ activeTab: 'maritime' }">
+            <div class="text-center max-w-4xl mx-auto">
+                <h2 class="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">Strategic Application in Core Verticals</h2>
+                <p class="mt-4 text-lg text-slate-600">The true value of computer vision is realized when it's applied to solve specific problems within distinct business domains. Explore the most compelling, evidence-based applications within our firm's existing areas of strength.</p>
+            </div>
+
+            <div class="mt-12">
+                <div class="flex flex-wrap justify-center gap-2 md:gap-4 mb-8">
+                    <button @click="activeTab = 'maritime'" :class="{ 'active': activeTab === 'maritime' }" class="tab-button px-4 py-2 text-sm font-semibold rounded-full bg-white shadow-sm hover:bg-blue-500 hover:text-white">⚓ Maritime & Logistics</button>
+                    <button @click="activeTab = 'arvr'" :class="{ 'active': activeTab === 'arvr' }" class="tab-button px-4 py-2 text-sm font-semibold rounded-full bg-white shadow-sm hover:bg-blue-500 hover:text-white">🕶️ AR/VR</button>
+                    <button @click="activeTab = 'security'" :class="{ 'active': activeTab === 'security' }" class="tab-button px-4 py-2 text-sm font-semibold rounded-full bg-white shadow-sm hover:bg-blue-500 hover:text-white">🛡️ Security</button>
+                    <button @click="activeTab = 'retail'" :class="{ 'active': activeTab === 'retail' }" class="tab-button px-4 py-2 text-sm font-semibold rounded-full bg-white shadow-sm hover:bg-blue-500 hover:text-white">🛒 Retail & Recommenders</button>
+                </div>
+
+                <div class="bg-white p-6 md:p-8 rounded-xl shadow-lg min-h-[400px]">
+                    <div x-show="activeTab === 'maritime'" x-cloak>
+                        <h3 class="text-2xl font-bold text-slate-900 mb-4">Revolutionizing Maritime and Logistics</h3>
+                        <p class="text-slate-600 mb-6">This sector represents a high-value, underserved market. CV can solve multi-million-dollar problems in asset tracking, safety compliance, and equipment maintenance, delivering substantial ROI.</p>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="font-semibold text-slate-800">Automated Container ID & Tracking</h4>
+                                <p class="text-slate-600 mt-1">Using Optical Character Recognition (OCR), systems can read container IDs with >99% accuracy, eliminating manual data entry errors and preventing costly delays from misplaced containers. <strong class="text-blue-600">Case Study: Kalmar Smart System.</strong></p>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-slate-800">Predictive Maintenance</h4>
+                                <p class="text-slate-600 mt-1">AI analyzes live video of port equipment to predict maintenance needs, preventing unplanned downtime and improving operational flow. <strong class="text-blue-600">Case Study: Port of Rotterdam.</strong></p>
+                            </div>
+                             <div>
+                                <h4 class="font-semibold text-slate-800">Automated Damage Inspection</h4>
+                                <p class="text-slate-600 mt-1">CV systems automatically capture 360-degree views of cargo to detect, measure, and document damage, creating an objective digital record that accelerates insurance claims.</p>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-slate-800">PPE Compliance Monitoring</h4>
+                                <p class="text-slate-600 mt-1">Object detection models monitor video feeds to ensure workers wear required safety gear (helmets, vests), automatically alerting supervisors to non-compliance.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div x-show="activeTab === 'arvr'" x-cloak>
+                        <h3 class="text-2xl font-bold text-slate-900 mb-4">Enhancing Immersive Experiences</h3>
+                        <p class="text-slate-600 mb-6">CV is the core competency required to build the next generation of AR/VR applications. Hand tracking, gesture recognition, and spatial mapping are the new "mouse and keyboard."</p>
+                         <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="font-semibold text-slate-800">Real-Time Environment Mapping (SLAM)</h4>
+                                <p class="text-slate-600 mt-1">Allows a device to build a 3D map of its surroundings, enabling the precise and persistent placement of virtual objects in the real world. <strong class="text-blue-600">Product: Microsoft HoloLens 2.</strong></p>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-slate-800">Gesture Recognition & Natural Interaction</h4>
+                                <p class="text-slate-600 mt-1">CV tracks hand and finger movements, allowing users to point, pinch, and grab virtual objects with their bare hands, lowering the learning curve for new users. <strong class="text-blue-600">Product: Meta Quest 3.</strong></p>
+                            </div>
+                             <div>
+                                <h4 class="font-semibold text-slate-800">Retail Visualization</h4>
+                                <p class="text-slate-600 mt-1">AR apps allow customers to accurately visualize how products like furniture will look and fit in their own homes, bridging the "imagination gap" and reducing returns. <strong class="text-blue-600">Case Study: IKEA Place.</strong></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div x-show="activeTab === 'security'" x-cloak>
+                        <h3 class="text-2xl font-bold text-slate-900 mb-4">Fortifying the Security Landscape</h3>
+                        <p class="text-slate-600 mb-6">CV is transforming security from a reactive, forensic discipline into a proactive, real-time intelligence operation for both physical and cyber domains.</p>
+                         <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="font-semibold text-slate-800">Proactive Physical Security</h4>
+                                <p class="text-slate-600 mt-1">AI-powered cameras distinguish between people, vehicles, and animals, reducing false alarms by up to 90%. They analyze behavior to flag anomalies like loitering or trespassing. <strong class="text-blue-600">Case Study: Give Kids The World Village (85% faster response).</strong></p>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-slate-800">Cybersecurity Threat Detection (UEBA)</h4>
+                                <p class="text-slate-600 mt-1">AI learns the normal behavior of every user and device on a network, then monitors for deviations that could indicate a cyberattack or insider threat. <strong class="text-blue-600">Case Study: CordenPharma (detected hidden malware).</strong></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div x-show="activeTab === 'retail'" x-cloak>
+                        <h3 class="text-2xl font-bold text-slate-900 mb-4">Redefining Retail & Recommendations</h3>
+                        <p class="text-slate-600 mb-6">Visual search is fundamentally changing how consumers discover and shop for products, moving beyond text keywords to a more intuitive, image-driven experience.</p>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="font-semibold text-slate-800">Visual Product Discovery</h4>
+                                <p class="text-slate-600 mt-1">Users can search with an image to find visually similar items, closing the loop between inspiration and transaction. <strong class="text-blue-600">Case Study: Pinterest Lens (600M+ visual searches/month).</strong></p>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-slate-800">Automated Inventory Management</h4>
+                                <p class="text-slate-600 mt-1">Autonomous robots or fixed cameras use CV to scan shelves, identifying out-of-stock items, misplaced products, and pricing errors in real-time. <strong class="text-blue-600">Example: Simbe Robotics Tally.</strong></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <hr class="my-12 border-slate-200">
+
+        <section id="roadmap" class="py-12 md:py-16">
+            <div class="text-center max-w-4xl mx-auto">
+                <h2 class="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">The Path Forward: A Five-Year Strategic Roadmap</h2>
+                <p class="mt-4 text-lg text-slate-600">This roadmap outlines a clear, multi-year plan addressing organizational structure, technology adoption, and product evolution to build a world-class computer vision capability.</p>
+            </div>
+
+            <div class="mt-12">
+                <h3 class="text-2xl font-bold text-slate-900 mb-6 text-center">Go-to-Market: The "Partner-Then-Build" Approach</h3>
+                <div class="relative mt-8">
+                    <div class="absolute left-0 top-1/2 w-full h-1 bg-slate-300"></div>
+                    <div class="relative flex justify-between">
+                        <div class="w-1/3 text-center">
+                            <div class="relative mb-2">
+                                <div class="mx-auto w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center ring-4 ring-slate-50">1</div>
+                            </div>
+                            <h4 class="font-semibold">Phase 1: Partner & Leverage (Year 1)</h4>
+                            <p class="text-sm text-slate-600 mt-1">Focus on speed-to-market. Use platforms like Roboflow and AWS to deliver solutions for pilot clients, generating revenue and proprietary data.</p>
+                        </div>
+                        <div class="w-1/3 text-center">
+                            <div class="relative mb-2">
+                                <div class="mx-auto w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center ring-4 ring-slate-50">2</div>
+                            </div>
+                            <h4 class="font-semibold">Phase 2: Build & Differentiate (Year 2-3)</h4>
+                            <p class="text-sm text-slate-600 mt-1">Use data from Phase 1 to build custom, high-performance models that outperform generic solutions, creating a defensible IP moat.</p>
+                        </div>
+                        <div class="w-1/3 text-center">
+                            <div class="relative mb-2">
+                                <div class="mx-auto w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center ring-4 ring-slate-50">3</div>
+                            </div>
+                            <h4 class="font-semibold">Phase 3: Scale & Expand (Year 3-5)</h4>
+                            <p class="text-sm text-slate-600 mt-1">Evolve toward the next frontier: Multimodal AI. Fuse vision with language and audio to create sophisticated, context-aware solutions.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-16">
+                <h3 class="text-2xl font-bold text-slate-900 mb-6 text-center">Building the A-Team: Initial "AI Pod" Structure</h3>
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+                    <template x-for="role in roles" :key="role.name">
+                         <div @click="expandedRole = (expandedRole === role.name ? '' : role.name)" class="cursor-pointer text-center p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition">
+                            <div class="text-3xl mb-2" x-text="role.icon"></div>
+                            <h4 class="font-semibold text-sm" x-text="role.name"></h4>
+                         </div>
+                    </template>
+                </div>
+                <template x-for="role in roles" :key="role.name">
+                    <div x-show="expandedRole === role.name" x-cloak class="mt-6 bg-blue-50 p-6 rounded-lg"
+                         x-transition:enter="transition ease-out duration-300"
+                         x-transition:enter-start="opacity-0 transform -translate-y-4"
+                         x-transition:enter-end="opacity-100 transform translate-y-0"
+                         x-transition:leave="transition ease-in duration-200"
+                         x-transition:leave-start="opacity-100 transform translate-y-0"
+                         x-transition:leave-end="opacity-0 transform -translate-y-4">
+                        <h4 class="font-bold text-lg text-blue-800" x-text="role.name"></h4>
+                        <p class="mt-2 text-blue-900" x-text="role.description"></p>
+                    </div>
+                </template>
+            </div>
+        </section>
+
+        <hr class="my-12 border-slate-200">
+
+        <section id="ethics" class="py-12 md:py-16">
+             <div class="text-center max-w-4xl mx-auto">
+                <h2 class="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">The Ethical Imperative: Bias as Risk & Opportunity</h2>
+                <p class="mt-4 text-lg text-slate-600">A pivot into CV would be irresponsible without addressing its most significant ethical challenges. Proactively building fair, transparent, and accountable AI is not a compliance burden; it is a powerful commercial differentiator.</p>
+            </div>
+            <div class="mt-12 grid gap-8 md:grid-cols-2 items-center">
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <h3 class="text-lg font-semibold text-slate-900 mb-1">Facial Recognition Bias: "Gender Shades" Study</h3>
+                    <p class="text-slate-600 mb-4">Commercial facial analysis systems show staggering disparities in accuracy, posing significant legal and reputational risks.</p>
+                    <div class="chart-container">
+                        <canvas id="biasChart"></canvas>
+                    </div>
+                </div>
+                <div class="space-y-4">
+                    <h3 class="text-xl font-bold text-slate-900">Real-World Consequences</h3>
+                    <p class="text-slate-600">Algorithmic bias has led to devastating outcomes, including multiple documented cases of false arrests and wrongful imprisonment based on faulty facial recognition matches.</p>
+                    <h3 class="text-xl font-bold text-slate-900">The Vicious Cycle</h3>
+                    <p class="text-slate-600">Biased systems trained on biased data (e.g., historical arrest records) are more likely to misidentify people of color, leading to more arrests and further entrenching the original bias in the data.</p>
+                    <h3 class="text-xl font-bold text-slate-900">The Commercial Opportunity</h3>
+                    <p class="text-slate-600">A firm that can prove its models are robust, fair, and transparent will have a substantial advantage when bidding for contracts with risk-averse enterprise and government clients.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-slate-800 text-white">
+        <div class="container mx-auto py-6 px-4 sm:px-6 lg:px-8 text-center text-sm text-slate-400">
+            <p>Computer Vision Strategic Dashboard | An Interactive Report</p>
+        </div>
+    </footer>
+
+    <script>
+        function dashboardData() {
+            return {
+                activeSection: 'strategy',
+                expandedRole: '',
+                roles: [
+                    { name: 'Head of CV / CAIO', icon: '👑', description: 'Drives the overall AI vision and strategy; secures resources and funding; aligns stakeholders; removes organizational barriers.' },
+                    { name: 'AI Product Manager', icon: '🗺️', description: 'Owns the product roadmap; defines use cases and requirements; acts as the bridge between clients, business, and tech teams.' },
+                    { name: 'ML Engineer', icon: '⚙️', description: 'The core technical engine; responsible for data exploration, model selection, training, evaluation, and optimization.' },
+                    { name: 'Data Engineer', icon: '🏗️', description: 'Designs, builds, and maintains the data infrastructure; creates robust and scalable data pipelines and ETL processes.' },
+                    { name: 'MLOps Specialist', icon: '🚀', description: 'Manages the end-to-end lifecycle of models in production; focuses on deployment, automation (CI/CD), monitoring, and maintenance.' },
+                    { name: 'AI Ethicist', icon: '⚖️', description: 'Establishes and oversees responsible AI governance; conducts bias audits; ensures fairness, transparency, and accountability.' }
+                ]
+            };
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const marketGrowthCtx = document.getElementById('marketGrowthChart').getContext('2d');
+            new Chart(marketGrowthCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['2023', '2028 (Forecast)'],
+                    datasets: [{
+                        label: 'Visual Search Market Size ($ Billions)',
+                        data: [14.7, 33.5],
+                        backgroundColor: [
+                            'rgba(59, 130, 246, 0.6)',
+                            'rgba(37, 99, 235, 0.6)'
+                        ],
+                        borderColor: [
+                            'rgba(59, 130, 246, 1)',
+                            'rgba(37, 99, 235, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Market Size in USD Billions'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `$${context.raw} Billion`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            const biasCtx = document.getElementById('biasChart').getContext('2d');
+            new Chart(biasCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Light-Skinned Men', 'Dark-Skinned Women'],
+                    datasets: [{
+                        label: 'Error Rate',
+                        data: [0.8, 34.7],
+                        backgroundColor: [
+                            'rgba(59, 130, 246, 0.6)',
+                            'rgba(220, 38, 38, 0.6)'
+                        ],
+                        borderColor: [
+                            'rgba(59, 130, 246, 1)',
+                            'rgba(220, 38, 38, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    indexAxis: 'y',
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Error Rate (%)'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `${context.raw}% Error Rate`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            const sections = document.querySelectorAll('main section');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.4
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        window.dispatchEvent(new CustomEvent('update-active-section', { detail: id }));
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
+</body>
+</html>
