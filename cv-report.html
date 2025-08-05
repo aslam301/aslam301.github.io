@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Computer Vision Strategy Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0f172a;
+            color: #94a3b8;
+        }
+
+        .nav-indicator {
+            transition: all 0.2s ease-in-out;
+        }
+
+        .group.active .nav-indicator,
+        .group:hover .nav-indicator {
+            width: 4rem;
+            background-color: #e2e8f0;
+        }
+
+        .group.active .nav-text,
+        .group:hover .nav-text {
+            color: #e2e8f0;
+        }
+        
+        .tab-button.active {
+            color: #5eead4;
+            border-color: #5eead4;
+        }
+    </style>
+</head>
+
+<body class="antialiased selection:bg-teal-300 selection:text-teal-900">
+    <div class="mx-auto min-h-screen max-w-screen-xl px-6 py-12 md:px-12 md:py-20 lg:px-24 lg:py-0">
+        <div class="lg:flex lg:justify-between lg:gap-4">
+            <header class="lg:sticky lg:top-0 lg:flex lg:max-h-screen lg:w-1/2 lg:flex-col lg:justify-between lg:py-24">
+                <div>
+                    <h1 class="text-4xl font-bold tracking-tight text-slate-200 sm:text-5xl">CV Strategy</h1>
+                    <h2 class="mt-3 text-lg font-medium tracking-tight text-slate-200 sm:text-xl">Interactive Dashboard</h2>
+                    <p class="mt-4 max-w-xs leading-normal">An interactive analysis of the computer vision market and a strategic roadmap for implementation.</p>
+                    <nav class="nav hidden lg:block" aria-label="In-page jump links">
+                        <ul class="mt-16 w-max">
+                            <li><a class="group flex items-center py-3 active" href="#opportunity"><span
+                                        class="nav-indicator mr-4 h-px w-8 bg-slate-600"></span><span
+                                        class="nav-text text-xs font-bold uppercase tracking-widest text-slate-500">Opportunity</span></a>
+                            </li>
+                            <li><a class="group flex items-center py-3" href="#applications"><span
+                                        class="nav-indicator mr-4 h-px w-8 bg-slate-600"></span><span
+                                        class="nav-text text-xs font-bold uppercase tracking-widest text-slate-500">Applications</span></a>
+                            </li>
+                            <li><a class="group flex items-center py-3" href="#roadmap"><span
+                                        class="nav-indicator mr-4 h-px w-8 bg-slate-600"></span><span
+                                        class="nav-text text-xs font-bold uppercase tracking-widest text-slate-500">Roadmap</span></a>
+                            </li>
+                            <li><a class="group flex items-center py-3" href="#ethics"><span
+                                        class="nav-indicator mr-4 h-px w-8 bg-slate-600"></span><span
+                                        class="nav-text text-xs font-bold uppercase tracking-widest text-slate-500">Ethics</span></a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                 <div class="mt-8 flex items-center text-sm">
+                     <p>Generated: <span id="generation-date"></span></p>
+                 </div>
+            </header>
+            <main id="content" class="pt-24 lg:w-1/2 lg:py-24">
+                <section id="opportunity" class="mb-16 scroll-mt-16 md:mb-24 lg:mb-36 lg:scroll-mt-24"
+                    aria-label="Market Opportunity">
+                    <div
+                        class="sticky top-0 z-20 -mx-6 mb-4 w-screen bg-slate-900/75 px-6 py-5 backdrop-blur md:-mx-12 md:px-12 lg:sr-only lg:relative lg:top-auto lg:mx-auto lg:w-full lg:px-0 lg:py-0 lg:opacity-0">
+                        <h2 class="text-sm font-bold uppercase tracking-widest text-slate-200 lg:sr-only">Market Opportunity</h2>
+                    </div>
+                    <div>
+                        <p class="mb-4">The strategic pivot to computer vision is underpinned by a compelling economic case. The market is not only large but is expanding at a rapid pace, with tangible impacts on business productivity and efficiency that create clear ROI for customers.</p>
+                        
+                        <div class="mt-8 bg-slate-800/50 p-6 rounded-lg shadow-inner">
+                             <h3 class="font-medium text-slate-200 mb-2">Visual Search Market Growth</h3>
+                             <p class="text-sm text-slate-400 mb-4">This single sub-domain highlights the massive overall market opportunity, projected to more than double in five years. Hover over the bars for details.</p>
+                             <canvas id="marketGrowthChart"></canvas>
+                        </div>
+
+                        <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
+                             <div class="bg-slate-800/50 p-6 rounded-lg shadow-inner">
+                                <h3 class="font-medium text-slate-200">Productivity Gains</h3>
+                                <p class="mt-2 text-sm leading-normal">AI implementation can increase overall business productivity by up to <strong class="text-teal-300">40%</strong> by automating repetitive tasks.</p>
+                             </div>
+                             <div class="bg-slate-800/50 p-6 rounded-lg shadow-inner">
+                                <h3 class="font-medium text-slate-200">Efficiency Gains</h3>
+                                <p class="mt-2 text-sm leading-normal">AI-based threat detection systems identify attacks <strong class="text-teal-300">85% faster</strong> than traditional tools, reducing risk and saving costs.</p>
+                             </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="applications" class="mb-16 scroll-mt-16 md:mb-24 lg:mb-36 lg:scroll-mt-24"
+                    aria-label="Core Applications">
+                    <div
+                        class="sticky top-0 z-20 -mx-6 mb-4 w-screen bg-slate-900/75 px-6 py-5 backdrop-blur md:-mx-12 md:px-12 lg:sr-only lg:relative lg:top-auto lg:mx-auto lg:w-full lg:px-0 lg:py-0 lg:opacity-0">
+                        <h2 class="text-sm font-bold uppercase tracking-widest text-slate-200 lg:sr-only">Core Applications</h2>
+                    </div>
+                    <div x-data="{ activeTab: 'maritime' }">
+                        <p class="mb-4">The true value of computer vision is realized when applied to solve specific problems. Here are the most compelling applications within the firm's existing areas of strength.</p>
+                        
+                        <div class="mb-6 flex border-b border-slate-700">
+                            <button @click="activeTab = 'maritime'" :class="{ 'active': activeTab === 'maritime' }" class="tab-button -mb-px border-b-2 border-transparent px-4 py-2 text-sm font-medium text-slate-400 hover:text-slate-200">Maritime</button>
+                            <button @click="activeTab = 'arvr'" :class="{ 'active': activeTab === 'arvr' }" class="tab-button -mb-px border-b-2 border-transparent px-4 py-2 text-sm font-medium text-slate-400 hover:text-slate-200">AR/VR</button>
+                            <button @click="activeTab = 'security'" :class="{ 'active': activeTab === 'security' }" class="tab-button -mb-px border-b-2 border-transparent px-4 py-2 text-sm font-medium text-slate-400 hover:text-slate-200">Security</button>
+                        </div>
+
+                        <ul class="group/list">
+                            <li class="mb-12" x-show="activeTab === 'maritime'" x-cloak>
+                                <div class="group relative grid gap-4 pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50">
+                                    <div class="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-slate-800/50 lg:group-hover:shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] lg:group-hover:drop-shadow-lg"></div>
+                                    <div class="z-10 sm:order-2 sm:col-span-6">
+                                        <h3 class="font-medium text-slate-200">Automated Cargo & Container Inspection</h3>
+                                        <p class="mt-2 text-sm leading-normal">Use Optical Character Recognition (OCR) to read container IDs with >99% accuracy, eliminating manual data entry. Automatically detect and document cargo damage to accelerate insurance claims.</p>
+                                    </div>
+                                    <img alt="Maritime cargo inspection" loading="lazy" width="200" height="48" class="aspect-video object-cover rounded border-2 border-slate-200/10 transition group-hover:border-slate-200/30 sm:order-1 sm:col-span-2 sm:translate-y-1" src="https://placehold.co/200x112/0f172a/94a3b8?text=Cargo+Scan">
+                                </div>
+                            </li>
+                             <li class="mb-12" x-show="activeTab === 'arvr'" x-cloak>
+                                <div class="group relative grid gap-4 pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50">
+                                    <div class="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-slate-800/50 lg:group-hover:shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] lg:group-hover:drop-shadow-lg"></div>
+                                    <div class="z-10 sm:order-2 sm:col-span-6">
+                                        <h3 class="font-medium text-slate-200">Real-Time Environment Mapping</h3>
+                                        <p class="mt-2 text-sm leading-normal">Enable next-gen AR/VR with Simultaneous Localization and Mapping (SLAM) to build 3D maps of surroundings, allowing for precise placement of virtual objects and natural, controller-free gesture interaction.</p>
+                                    </div>
+                                    <img alt="AR/VR environment mapping" loading="lazy" width="200" height="48" class="aspect-video object-cover rounded border-2 border-slate-200/10 transition group-hover:border-slate-200/30 sm:order-1 sm:col-span-2 sm:translate-y-1" src="https://placehold.co/200x112/0f172a/94a3b8?text=AR+Mapping">
+                                </div>
+                            </li>
+                             <li class="mb-12" x-show="activeTab === 'security'" x-cloak>
+                                <div class="group relative grid gap-4 pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50">
+                                    <div class="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-slate-800/50 lg:group-hover:shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] lg:group-hover:drop-shadow-lg"></div>
+                                    <div class="z-10 sm:order-2 sm:col-span-6">
+                                        <h3 class="font-medium text-slate-200">Proactive Threat Detection</h3>
+                                        <p class="mt-2 text-sm leading-normal">Transform surveillance from reactive to proactive. Use AI to distinguish people from vehicles, analyze behavior for anomalies, and reduce false alarms by up to 90%, enabling faster incident response.</p>
+                                    </div>
+                                    <img alt="Security camera AI" loading="lazy" width="200" height="48" class="aspect-video object-cover rounded border-2 border-slate-200/10 transition group-hover:border-slate-200/30 sm:order-1 sm:col-span-2 sm:translate-y-1" src="https://placehold.co/200x112/0f172a/94a3b8?text=Security+AI">
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section id="roadmap" class="mb-16 scroll-mt-16 md:mb-24 lg:mb-36 lg:scroll-mt-24"
+                    aria-label="Strategic Roadmap">
+                    <div
+                        class="sticky top-0 z-20 -mx-6 mb-4 w-screen bg-slate-900/75 px-6 py-5 backdrop-blur md:-mx-12 md:px-12 lg:sr-only lg:relative lg:top-auto lg:mx-auto lg:w-full lg:px-0 lg:py-0 lg:opacity-0">
+                        <h2 class="text-sm font-bold uppercase tracking-widest text-slate-200 lg:sr-only">Roadmap</h2>
+                    </div>
+                    <div>
+                        <h3 class="font-medium text-slate-200 mb-4">Go-to-Market: The "Partner-Then-Build" Approach</h3>
+                        <ol class="relative border-l border-slate-700">                  
+                            <li class="mb-10 ml-4">
+                                <div class="absolute w-3 h-3 bg-slate-500 rounded-full mt-1.5 -left-1.5 border border-slate-900"></div>
+                                <time class="mb-1 text-sm font-normal leading-none text-slate-500">Phase 1 (Year 1)</time>
+                                <h3 class="text-lg font-semibold text-slate-200">Partner & Leverage</h3>
+                                <p class="mb-4 text-base font-normal text-slate-400">Focus on speed-to-market. Use platforms like Roboflow and AWS to deliver solutions for pilot clients, generating revenue and proprietary data.</p>
+                            </li>
+                            <li class="mb-10 ml-4">
+                                <div class="absolute w-3 h-3 bg-slate-500 rounded-full mt-1.5 -left-1.5 border border-slate-900"></div>
+                                <time class="mb-1 text-sm font-normal leading-none text-slate-500">Phase 2 (Years 2-3)</time>
+                                <h3 class="text-lg font-semibold text-slate-200">Build & Differentiate</h3>
+                                <p class="text-base font-normal text-slate-400">Use data from Phase 1 to build custom, high-performance models that outperform generic solutions, creating a defensible IP moat.</p>
+                            </li>
+                            <li class="ml-4">
+                                <div class="absolute w-3 h-3 bg-slate-500 rounded-full mt-1.5 -left-1.5 border border-slate-900"></div>
+                                <time class="mb-1 text-sm font-normal leading-none text-slate-500">Phase 3 (Years 3-5)</time>
+                                <h3 class="text-lg font-semibold text-slate-200">Scale & Expand</h3>
+                                <p class="text-base font-normal text-slate-400">Evolve toward the next frontier: Multimodal AI. Fuse vision with language and audio to create sophisticated, context-aware solutions.</p>
+                            </li>
+                        </ol>
+                    </div>
+                </section>
+
+                <section id="ethics" class="mb-16 scroll-mt-16 md:mb-24 lg:mb-36 lg:scroll-mt-24"
+                    aria-label="Ethical Imperative">
+                    <div
+                        class="sticky top-0 z-20 -mx-6 mb-4 w-screen bg-slate-900/75 px-6 py-5 backdrop-blur md:-mx-12 md:px-12 lg:sr-only lg:relative lg:top-auto lg:mx-auto lg:w-full lg:px-0 lg:py-0 lg:opacity-0">
+                        <h2 class="text-sm font-bold uppercase tracking-widest text-slate-200 lg:sr-only">Ethical Imperative</h2>
+                    </div>
+                    <div>
+                        <p class="mb-4">Acknowledging the risks of AI bias is not a compliance burden; it is a commercial necessity. A firm that can prove its models are robust, fair, and transparent will have a substantial advantage.</p>
+                        
+                        <div class="mt-8 bg-slate-800/50 p-6 rounded-lg shadow-inner">
+                             <h3 class="font-medium text-slate-200 mb-2">Facial Recognition Bias: "Gender Shades" Study</h3>
+                             <p class="text-sm text-slate-400 mb-4">Commercial facial analysis systems show staggering disparities in accuracy, posing significant legal and reputational risks. Hover for details.</p>
+                             <canvas id="biasChart"></canvas>
+                        </div>
+                    </div>
+                </section>
+
+                <footer class="max-w-md pb-16 text-sm text-slate-500 sm:pb-0">
+                    <p>Dashboard based on the strategic analysis report. Built with Tailwind CSS and Chart.js. All text is set in the Inter typeface.
+                    </p>
+                </footer>
+            </main>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Set generation date
+            document.getElementById('generation-date').textContent = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+
+            // --- Chart Config ---
+            const chartOptions = {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        backgroundColor: '#1e293b',
+                        titleColor: '#e2e8f0',
+                        bodyColor: '#94a3b8',
+                        borderColor: '#334155',
+                        borderWidth: 1
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            color: '#334155'
+                        },
+                        ticks: {
+                            color: '#94a3b8'
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        },
+                        ticks: {
+                            color: '#94a3b8'
+                        }
+                    }
+                }
+            };
+            
+            // --- Market Growth Chart ---
+            const marketGrowthCtx = document.getElementById('marketGrowthChart').getContext('2d');
+            new Chart(marketGrowthCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['2023', '2028 (Forecast)'],
+                    datasets: [{
+                        label: 'Market Size ($B)',
+                        data: [14.7, 33.5],
+                        backgroundColor: 'rgba(20, 184, 166, 0.5)',
+                        borderColor: 'rgba(20, 184, 166, 1)',
+                        borderWidth: 1,
+                        borderRadius: 4
+                    }]
+                },
+                options: { ...chartOptions,
+                    scales: { ...chartOptions.scales, 
+                        y: { ...chartOptions.scales.y, 
+                            title: { display: true, text: 'Market Size in USD Billions', color: '#94a3b8' } 
+                        } 
+                    },
+                    plugins: { ...chartOptions.plugins, 
+                        tooltip: { ...chartOptions.plugins.tooltip, 
+                            callbacks: { label: (context) => `$${context.raw} Billion` }
+                        }
+                    }
+                }
+            });
+
+            // --- Bias Chart ---
+            const biasCtx = document.getElementById('biasChart').getContext('2d');
+            new Chart(biasCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Light-Skinned Men', 'Dark-Skinned Women'],
+                    datasets: [{
+                        label: 'Error Rate',
+                        data: [0.8, 34.7],
+                        backgroundColor: ['rgba(20, 184, 166, 0.5)', 'rgba(220, 38, 38, 0.5)'],
+                        borderColor: ['rgba(20, 184, 166, 1)', 'rgba(220, 38, 38, 1)'],
+                        borderWidth: 1,
+                        borderRadius: 4
+                    }]
+                },
+                options: { ...chartOptions,
+                    indexAxis: 'y',
+                    scales: { ...chartOptions.scales, 
+                        x: { ...chartOptions.scales.x, 
+                            title: { display: true, text: 'Error Rate (%)', color: '#94a3b8' } 
+                        } 
+                    },
+                    plugins: { ...chartOptions.plugins, 
+                        tooltip: { ...chartOptions.plugins.tooltip, 
+                            callbacks: { label: (context) => `${context.raw}% Error Rate` }
+                        }
+                    }
+                }
+            });
+
+            // --- Nav scroll highlighting ---
+            const sections = document.querySelectorAll('main section');
+            const navLinks = document.querySelectorAll('nav a.group');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        navLinks.forEach(link => {
+                            link.classList.toggle('active', link.getAttribute('href').includes(entry.target.id));
+                        });
+                    }
+                });
+            }, { rootMargin: "-30% 0px -70% 0px" });
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
+</body>
+
+</html>
